@@ -1,8 +1,10 @@
 package com.example.lemuel.android_payant.utils;
 
-import android.app.Application;
 import android.content.Context;
 
+import com.example.lemuel.android_payant.Payant;
+import com.example.lemuel.android_payant.exceptions.PayantNotInitializedException;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -20,11 +22,27 @@ public class ValidateTest {
 
     @Test(expected = NullPointerException.class)
     public void validateWhenNull() {
-        Validate.That.valueNotNull(null, "context");
+        Validate.valueNotNull(null, "context");
     }
+
 
     @Test
     public void validateWhenNonNull() {
-        Validate.That.valueNotNull("testing", "context");
+        Validate.valueNotNull("testing", "context");
     }
+
+    /*Payant is not initialized at this point so expected exception should be PayantNotInitializedException*/
+    @Test(expected = PayantNotInitializedException.class)
+    public void validateWhenPayantNotInitialized() {
+        Validate.payantInitialized();
+    }
+
+    @Test
+    public void checkPrivateKeySet()
+    {
+        Boolean keySet= Payant.isPrivateKeySet();
+        assertEquals(false, keySet);
+    }
+
+
 }
