@@ -6,9 +6,8 @@ import android.util.Log;
 
 import com.lemubit.lemuel.androidpayant.operations.clients.PayantClientManager;
 import com.lemubit.lemuel.androidpayant.operations.clients.PayantClientResponse.PayantClientResponse;
-import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
 
-public class MainActivity extends AppCompatActivity implements PayantClientManager.OnPayantClientAddedListener {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,29 +15,20 @@ public class MainActivity extends AppCompatActivity implements PayantClientManag
         setContentView(R.layout.activity_main);
         //PayantClient payantClient = new PayantClient();
         Payant.init(this);
-        PayantClient payantClient = new PayantClient();
+        Payant.setPrivateKey("3c93c4f1b8b264400c39f86db1c31b8add76121a1a37f1f0c2d52b3d");
 
-        payantClient.setCompany_name("Novateur");
-        payantClient.setPhone("+23408023107324");
-        payantClient.setEmail("charlesfree7@yahoo.com");
-        payantClient.setAddress("Abuja");
-        payantClient.setFirst_name("LemuelC");
-        payantClient.setLast_name("Ogbunude");
-        payantClient.setSettlement_bank("");
-        payantClient.setAccount_number("");
-        payantClient.setType("");
+        PayantClientManager.getPayantClient(166, new PayantClientManager.OnGetPayantClientListener() {
+            @Override
+            public void onGetClient(PayantClientResponse payantClientResponse) {
+                Log.e("PAYANT!!", payantClientResponse.toString());
+            }
 
-        PayantClientManager.addPayantClient(payantClient, this);
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e("PAYANT!!", t.getMessage());
+            }
+        });
     }
 
-    @Override
-    public void onClientAdded(PayantClientResponse payantClientResponse) {
-        Log.e("PAYANTCLIENT", payantClientResponse.toString());
 
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-        Log.e("PAYANTCLIENT", t.getMessage());
-    }
 }

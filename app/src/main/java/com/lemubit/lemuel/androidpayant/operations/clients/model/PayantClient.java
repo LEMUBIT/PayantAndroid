@@ -7,31 +7,31 @@ import com.lemubit.lemuel.androidpayant.annotation.PayantRequired;
  */
 public class PayantClient {
 
-    String company_name;
+    String company_name="";
 
     @PayantRequired
-    String first_name;
+    String first_name="";
 
     @PayantRequired
-    String last_name;
+    String last_name="";
 
     @PayantRequired
-    String email;
+    String email="";
 
     @PayantRequired
-    String phone;
+    String phone="";
 
 
-    String address;
+    String address="";
 
 
-    String type;
+    String type="";
 
 
-    String settlement_bank;
+    String settlement_bank="";
 
 
-    String account_number;
+    String account_number="";
 
     public PayantClient() {
     }

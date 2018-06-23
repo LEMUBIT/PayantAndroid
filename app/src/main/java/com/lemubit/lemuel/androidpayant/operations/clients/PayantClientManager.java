@@ -47,9 +47,34 @@ public class PayantClientManager {
 
     }
 
-    public static void getPayantClient(int ID) {
-        //TODO continue work from here
+    public static void getPayantClient(int clientID, final OnGetPayantClientListener onGetPayantClientListener) {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(GlobalStrings.DEMO_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        PayantAPI payantAPI = retrofit.create(PayantAPI.class);
+
+        Call<PayantClientResponse> payantClientResponseCall = payantAPI.getClient("application/json", "Bearer " + Payant.getPrivateKey(), clientID);
+
+        payantClientResponseCall.enqueue(new Callback<PayantClientResponse>() {
+            @Override
+            public void onResponse(Call<PayantClientResponse> call, Response<PayantClientResponse> response) {
+                onGetPayantClientListener.onGetClient(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<PayantClientResponse> call, Throwable t) {
+                onGetPayantClientListener.onFailure(t);
+            }
+        });
+
     }
+
 
     public interface OnPayantClientAddedListener {
         void onClientAdded(PayantClientResponse payantClientResponse);
