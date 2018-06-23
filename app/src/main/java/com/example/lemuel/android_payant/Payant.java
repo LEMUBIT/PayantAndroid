@@ -12,13 +12,12 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author lemuel
+ *
  */
 public final class Payant {
     public static Context applicationContext;
 
-
     private static boolean payantInitialized;
-
 
     private static String PRIVATE_KEY;
 
@@ -42,8 +41,8 @@ public final class Payant {
     }
 
 
-    /**Returns true if Payant has been initialized
-     *
+    /**
+     * Returns true if Payant has been initialized
      */
     @Contract(pure = true)
     public static boolean isPayantInitialized() {

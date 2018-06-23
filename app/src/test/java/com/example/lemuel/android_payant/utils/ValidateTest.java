@@ -44,5 +44,10 @@ public class ValidateTest {
         assertEquals(false, keySet);
     }
 
+    @Test(expected = PayantNotInitializedException.class)
+    public void attemptSetPrivateKey()
+    {
+        Payant.setPrivateKey("0000");
+    }
 
 }
