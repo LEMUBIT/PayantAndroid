@@ -1,6 +1,6 @@
 package com.lemubit.lemuel.androidpayant.api;
 
-import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientResponse;
+import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientInfo;
 import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
 
 import retrofit2.Call;
@@ -24,7 +24,7 @@ public interface PayantAPI {
      * @return
      */
     @POST("clients")
-    Call<PayantClientResponse> addClient(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantClient payantClient);
+    Call<PayantClientInfo> addClient(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantClient payantClient);
 
     /**
      * Gets information about client using Client ID.
@@ -34,7 +34,7 @@ public interface PayantAPI {
      * @return
      */
     @GET("clients/{id}")
-    Call<PayantClientResponse> getClient(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("id") int clientID);
+    Call<PayantClientInfo> getClient(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("id") int clientID);
 
     /**
      * Update client identified using clientID with information contained in PayantClient object.
@@ -45,5 +45,5 @@ public interface PayantAPI {
      * @return
      */
     @PUT("clients/{id}")
-    Call<PayantClientResponse> editClient(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("id") int clientID, @Body PayantClient payantClient);
+    Call<PayantClientInfo> editClient(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("id") int clientID, @Body PayantClient payantClient);
 }

@@ -3,7 +3,7 @@ package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse;
 /**
  * @author lemuel
  */
-public class PayantClientResponse {
+public class PayantClientInfo {
     private String status;
     private String message;
     private Data data;

@@ -6,8 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lemubit.lemuel.androidpayant.Payant;
 import com.lemubit.lemuel.androidpayant.api.PayantAPI;
-import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientResponse;
 import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
+import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientInfo;
 import com.lemubit.lemuel.androidpayant.utils.GlobalStrings;
 
 import org.jetbrains.annotations.Contract;
@@ -42,21 +42,21 @@ public class PayantClientManager {
      * notify {@code onPayantClientAddedListener} of its response or if an error
      * occurred.
      *
-     * @param payantClient                PayantClient object
-     * @param onPayantClientAddedListener Listens for network call response
+     * @param payantClient                PayantClient object.
+     * @param onPayantClientAddedListener Listens for network call response.
      */
     public static void addPayantClient(PayantClient payantClient, final OnPayantClientAddedListener onPayantClientAddedListener) {
 
-        Call<PayantClientResponse> payantClientResponseCall = payantAPI.addClient(contentType(), authorization(), payantClient);
+        Call<PayantClientInfo> payantClientInfoCall = payantAPI.addClient(contentType(), authorization(), payantClient);
 
-        payantClientResponseCall.enqueue(new Callback<PayantClientResponse>() {
+        payantClientInfoCall.enqueue(new Callback<PayantClientInfo>() {
             @Override
-            public void onResponse(Call<PayantClientResponse> call, Response<PayantClientResponse> response) {
+            public void onResponse(Call<PayantClientInfo> call, Response<PayantClientInfo> response) {
                 onPayantClientAddedListener.onClientAdded(response.body());
             }
 
             @Override
-            public void onFailure(Call<PayantClientResponse> call, Throwable t) {
+            public void onFailure(Call<PayantClientInfo> call, Throwable t) {
                 onPayantClientAddedListener.onFailure(t);
             }
         });
@@ -68,22 +68,22 @@ public class PayantClientManager {
      * and notify {@code OnGetPayantClientListener} of its response or if an error
      * occurred.
      *
-     * @param clientID                  The ID of the Client
-     * @param onGetPayantClientListener Listens for network call response
+     * @param clientID                  The ID of the Client.
+     * @param onGetPayantClientListener Listens for network call response.
      */
     public static void getPayantClient(int clientID, final OnGetPayantClientListener onGetPayantClientListener) {
 
 
-        Call<PayantClientResponse> payantClientResponseCall = payantAPI.getClient(contentType(), authorization(), clientID);
+        Call<PayantClientInfo> payantClientInfoCall = payantAPI.getClient(contentType(), authorization(), clientID);
 
-        payantClientResponseCall.enqueue(new Callback<PayantClientResponse>() {
+        payantClientInfoCall.enqueue(new Callback<PayantClientInfo>() {
             @Override
-            public void onResponse(Call<PayantClientResponse> call, Response<PayantClientResponse> response) {
+            public void onResponse(Call<PayantClientInfo> call, Response<PayantClientInfo> response) {
                 onGetPayantClientListener.onGetClient(response.body());
             }
 
             @Override
-            public void onFailure(Call<PayantClientResponse> call, Throwable t) {
+            public void onFailure(Call<PayantClientInfo> call, Throwable t) {
                 onGetPayantClientListener.onFailure(t);
             }
         });
@@ -92,23 +92,25 @@ public class PayantClientManager {
 
 
     /**
-     * Update client identified using clientID with information contained in PayantClient object.
+     * Update client identified using clientID with information contained in PayantClient object
+     * and notify {@code onPayantClientEditedListener} of its response or if an error
+     * occurred.
      *
-     * @param clientID                     The ID of the Client
-     * @param payantClient                 PayantClient object containing updated information about client
-     * @param onPayantClientEditedListener Listens for network call response
+     * @param clientID                     The ID of the Client.
+     * @param payantClient                 PayantClient object containing updated information about client.
+     * @param onPayantClientEditedListener Listens for network call response.
      */
     public static void editPayantClient(int clientID, PayantClient payantClient, final OnPayantClientEditedListener onPayantClientEditedListener) {
-        Call<PayantClientResponse> payantClientResponseCall = payantAPI.editClient(contentType(), authorization(), clientID, payantClient);
+        Call<PayantClientInfo> payantClientInfoCall = payantAPI.editClient(contentType(), authorization(), clientID, payantClient);
 
-        payantClientResponseCall.enqueue(new Callback<PayantClientResponse>() {
+        payantClientInfoCall.enqueue(new Callback<PayantClientInfo>() {
             @Override
-            public void onResponse(Call<PayantClientResponse> call, Response<PayantClientResponse> response) {
+            public void onResponse(Call<PayantClientInfo> call, Response<PayantClientInfo> response) {
                 onPayantClientEditedListener.onClientEdited(response.body());
             }
 
             @Override
-            public void onFailure(Call<PayantClientResponse> call, Throwable t) {
+            public void onFailure(Call<PayantClientInfo> call, Throwable t) {
                 onPayantClientEditedListener.onFailure(t);
             }
         });
@@ -127,20 +129,20 @@ public class PayantClientManager {
     }
 
     public interface OnPayantClientAddedListener {
-        void onClientAdded(PayantClientResponse payantClientResponse);
+        void onClientAdded(PayantClientInfo payantClientInfo);
 
         void onFailure(Throwable t);
     }
 
     public interface OnGetPayantClientListener {
-        void onGetClient(PayantClientResponse payantClientResponse);
+        void onGetClient(PayantClientInfo payantClientInfo);
 
         void onFailure(Throwable t);
     }
 
 
     public interface OnPayantClientEditedListener {
-        void onClientEdited(PayantClientResponse payantClientResponse);
+        void onClientEdited(PayantClientInfo payantClientInfo);
 
         void onFailure(Throwable t);
     }

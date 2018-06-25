@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.lemubit.lemuel.androidpayant.operations.clients.PayantClientManager;
-import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientResponse;
+import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientInfo;
 import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         int id = 169;
         PayantClientManager.editPayantClient(id, payantClient, new PayantClientManager.OnPayantClientEditedListener() {
             @Override
-            public void onClientEdited(PayantClientResponse payantClientResponse) {
-                Log.e("PAYANT!",payantClientResponse.toString());
+            public void onClientEdited(PayantClientInfo payantClientInfo) {
+                Log.e("PAYANT!", payantClientInfo.toString());
             }
 
             @Override
