@@ -1,4 +1,4 @@
-package com.lemubit.lemuel.androidpayant.operations.clients.PayantClientResponse;
+package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse;
 
 /**
  * @author lemuel

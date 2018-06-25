@@ -2,36 +2,37 @@ package com.lemubit.lemuel.androidpayant.operations.clients.model;
 
 import com.lemubit.lemuel.androidpayant.annotation.PayantRequired;
 
- /**
+/**
+ * Payant Client model class, user's first name, last name, E-mail and phone number is required.
  * @author lemuel
  */
 public class PayantClient {
 
-    String company_name="";
+    String company_name = "";
 
     @PayantRequired
-    String first_name="";
+    String first_name = "";
 
     @PayantRequired
-    String last_name="";
+    String last_name = "";
 
     @PayantRequired
-    String email="";
+    String email = "";
 
     @PayantRequired
-    String phone="";
+    String phone = "";
 
 
-    String address="";
+    String address = "";
 
 
-    String type="";
+    String type = "";
 
 
-    String settlement_bank="";
+    String settlement_bank = "";
 
 
-    String account_number="";
+    String account_number = "";
 
     public PayantClient() {
     }
@@ -101,6 +102,11 @@ public class PayantClient {
         return phone;
     }
 
+    /**
+     * Note: Use international phone Number format
+     *
+     * @param phone
+     */
     @PayantRequired
     public void setPhone(String phone) {
         this.phone = phone;
