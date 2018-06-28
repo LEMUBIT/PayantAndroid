@@ -1,6 +1,7 @@
 package com.lemubit.lemuel.androidpayant;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.lemubit.lemuel.androidpayant.exceptions.PayantNotInitializedException;
 import com.lemubit.lemuel.androidpayant.exceptions.PayantPrivateKeyNotSetException;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.Contract;
 public final class Payant {
     public static Context applicationContext;
 
-    private static boolean payantInitialized;
+    private static boolean payantInitialized = false;
 
     private static String PRIVATE_KEY;
 
@@ -27,15 +28,20 @@ public final class Payant {
      *
      * @param applicationContext
      */
-    public static synchronized void init(Context applicationContext) {
+    public static void init(Context applicationContext) {
 
-        Validate.valueNotNull(applicationContext, "applicationContext");
 
-        Validate.internetPermissionAvailable(applicationContext);
+        if (payantInitialized) {
+            Log.w("Payant Warning","Payant has already been initialized, you need to initialize just once!");
+        } else {
+            Validate.valueNotNull(applicationContext, "applicationContext");
 
-        Payant.applicationContext = applicationContext;
+            Validate.internetPermissionAvailable(applicationContext);
 
-        payantInitialized = true;
+            Payant.applicationContext = applicationContext;
+
+            payantInitialized = true;
+        }
 
     }
 

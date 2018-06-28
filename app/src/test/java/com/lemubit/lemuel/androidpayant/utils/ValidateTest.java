@@ -26,12 +26,6 @@ public class ValidateTest {
         Validate.valueNotNull(null, "context");
     }
 
-
-    @Test
-    public void validateWhenNonNull() {
-        Validate.valueNotNull("testing", "context");
-    }
-
     /*Payant is not initialized at this point so expected exception should be PayantNotInitializedException*/
     @Test(expected = PayantNotInitializedException.class)
     public void validateWhenPayantNotInitialized() {

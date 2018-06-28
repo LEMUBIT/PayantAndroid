@@ -3,7 +3,7 @@ package com.lemubit.lemuel.androidpayant.operations.clients.model;
 import com.lemubit.lemuel.androidpayant.annotation.PayantRequired;
 
 /**
- * Payant Client model class, user's first name, last name, E-mail and phone number is required.
+ * Create new client with PayantClient class. User's first name, last name, E-mail and phone number are required.
  *
  * @author lemuel
  */

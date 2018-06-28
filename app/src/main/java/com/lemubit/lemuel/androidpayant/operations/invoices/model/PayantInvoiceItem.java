@@ -25,6 +25,9 @@ public class PayantInvoiceItem {
         this.quantity = quantity;
     }
 
+    public PayantInvoiceItem() {
+    }
+
     public String getItem() {
         return item;
     }

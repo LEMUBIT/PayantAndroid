@@ -1,8 +1,10 @@
 package com.lemubit.lemuel.androidpayant.api;
 
+import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
 import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.DeletePayantClient;
 import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientInfo;
-import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
+import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoice;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceInfo;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -16,10 +18,11 @@ import retrofit2.http.Path;
 /**
  * @author lemuel
  */
-public interface PayantAPI {
+public interface PayantApiService {
 
     /**
      * Save new Client information found in the PayantClient object.
+     *
      * @param contentType
      * @param authorization
      * @param payantClient
@@ -30,6 +33,7 @@ public interface PayantAPI {
 
     /**
      * Gets information about client using Client ID.
+     *
      * @param contentType
      * @param authorization
      * @param clientID
@@ -40,6 +44,7 @@ public interface PayantAPI {
 
     /**
      * Update client identified using clientID with information contained in PayantClient object.
+     *
      * @param contentType
      * @param authorization
      * @param clientID
@@ -52,6 +57,7 @@ public interface PayantAPI {
 
     /**
      * Delete a client identified using clientID.
+     *
      * @param contentType
      * @param authorization
      * @param clientID
@@ -59,4 +65,8 @@ public interface PayantAPI {
      */
     @DELETE("clients/{id}")
     Call<DeletePayantClient> deleteClient(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("id") int clientID);
+
+
+    @POST("invoices")
+    Call<PayantInvoiceInfo> addInvoice(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantInvoice payantInvoice);
 }

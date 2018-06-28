@@ -5,6 +5,11 @@ import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
 
 import java.util.List;
 
+/**
+ * Create new Invoice with PayantInvoice class. Invoice's Client, Client ID, Due date, Items and Fee bearer are required.
+ *
+ * @author lemuel
+ */
 public class PayantInvoice {
 
     @PayantRequired
@@ -34,28 +39,31 @@ public class PayantInvoice {
 
     String metadata;
 
-    public PayantInvoice(PayantClient client, String client_id, String due_date, String fee_bearer, String tokenize, String card_token, List<PayantInvoiceItem> items, String recipient, String recipient_id, String merchant_ref, String metadata) {
+    public PayantInvoice() {
+    }
+
+    public PayantInvoice(PayantClient client, String clientId, String dueDate, String feeBearer, String tokenize, String cardToken, List<PayantInvoiceItem> items, String recipient, String recipientId, String merchantRef, String metadata) {
         this.client = client;
-        this.client_id = client_id;
-        this.due_date = due_date;
-        this.fee_bearer = fee_bearer;
+        this.client_id = clientId;
+        this.due_date = dueDate;
+        this.fee_bearer = feeBearer;
         this.tokenize = tokenize;
-        this.card_token = card_token;
+        this.card_token = cardToken;
         this.items = items;
         this.recipient = recipient;
-        this.recipient_id = recipient_id;
-        this.merchant_ref = merchant_ref;
+        this.recipient_id = recipientId;
+        this.merchant_ref = merchantRef;
         this.metadata = metadata;
     }
 
-    public PayantInvoice(PayantClient client, String client_id, String due_date, String fee_bearer, List<PayantInvoiceItem> items, String recipient, String recipient_id) {
+    public PayantInvoice(PayantClient client, String clientId, String dueDate, String feeBearer, List<PayantInvoiceItem> items, String recipient, String recipientId) {
         this.client = client;
-        this.client_id = client_id;
-        this.due_date = due_date;
-        this.fee_bearer = fee_bearer;
+        this.client_id = clientId;
+        this.due_date = dueDate;
+        this.fee_bearer = feeBearer;
         this.items = items;
         this.recipient = recipient;
-        this.recipient_id = recipient_id;
+        this.recipient_id = recipientId;
     }
 
     public PayantInvoice(PayantClient client, String client_id, String due_date, String fee_bearer, List<PayantInvoiceItem> items) {
@@ -67,59 +75,93 @@ public class PayantInvoice {
     }
 
 
-
     public PayantClient getClient() {
         return client;
     }
 
+    /**
+     * Set invoice Client Data
+     *
+     * @param client
+     */
     public void setClient(PayantClient client) {
         this.client = client;
     }
 
-    public String getClient_id() {
+    public String getclientId() {
         return client_id;
     }
 
-    public void setClient_id(String client_id) {
-        this.client_id = client_id;
+    /**
+     * Set invoice Client ID
+     *
+     * @param clientId
+     */
+    public void setclientId(String clientId) {
+        this.client_id = clientId;
     }
 
-    public String getDue_date() {
+    public String getdueDate() {
         return due_date;
     }
 
-    public void setDue_date(String due_date) {
-        this.due_date = due_date;
+    /**
+     * Set invoice due date (MM/DD/YYYY).
+     *
+     * @param dueDate
+     */
+    public void setdueDate(String dueDate) {
+        this.due_date = dueDate;
     }
 
-    public String getFee_bearer() {
+    public String getfeeBearer() {
         return fee_bearer;
     }
 
-    public void setFee_bearer(String fee_bearer) {
-        this.fee_bearer = fee_bearer;
+    /**
+     * Set invoice fee bearer (account or client)
+     *
+     * @param feeBearer
+     */
+    public void setfeeBearer(String feeBearer) {
+        this.fee_bearer = feeBearer;
     }
 
     public String getTokenize() {
         return tokenize;
     }
 
+    /**
+     * Tokenize card used to make payment for this invoice (true or false). Defaults to (false).
+     *
+     * @param tokenize
+     */
     public void setTokenize(String tokenize) {
         this.tokenize = tokenize;
     }
 
-    public String getCard_token() {
+    public String getcardToken() {
         return card_token;
     }
 
-    public void setCard_token(String card_token) {
-        this.card_token = card_token;
+    /**
+     * Card token generated from a tokenized transaction to automatically make payment for this invoice.
+     *
+     * @param cardToken
+     */
+    public void setcardToken(String cardToken) {
+        this.card_token = cardToken;
     }
 
     public List<PayantInvoiceItem> getItems() {
         return items;
     }
 
+    /**
+     * Set invoice items
+     *
+     * @param items
+     */
     public void setItems(List<PayantInvoiceItem> items) {
         this.items = items;
     }
@@ -128,30 +170,50 @@ public class PayantInvoice {
         return recipient;
     }
 
+    /**
+     * Invoice payment recipient (account or wallet) Defaults to (account).
+     *
+     * @param recipient
+     */
     public void setRecipient(String recipient) {
         this.recipient = recipient;
     }
 
-    public String getRecipient_id() {
+    public String getrecipientId() {
         return recipient_id;
     }
 
-    public void setRecipient_id(String recipient_id) {
-        this.recipient_id = recipient_id;
+    /**
+     * Invoice payment recipient id (Wallet Ref.) Required if recipient is wallet
+     *
+     * @param recipientId
+     */
+    public void setrecipientId(String recipientId) {
+        this.recipient_id = recipientId;
     }
 
-    public String getMerchant_ref() {
+    public String getmerchantRef() {
         return merchant_ref;
     }
 
-    public void setMerchant_ref(String merchant_ref) {
-        this.merchant_ref = merchant_ref;
+    /**
+     * Merchant's unique invoice reference code
+     *
+     * @param merchantRef
+     */
+    public void setmerchantRef(String merchantRef) {
+        this.merchant_ref = merchantRef;
     }
 
     public String getMetadata() {
         return metadata;
     }
 
+    /**
+     * Key-value pairs object
+     *
+     * @param metadata
+     */
     public void setMetadata(String metadata) {
         this.metadata = metadata;
     }

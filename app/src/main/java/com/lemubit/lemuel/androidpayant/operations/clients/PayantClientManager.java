@@ -1,23 +1,15 @@
 package com.lemubit.lemuel.androidpayant.operations.clients;
 
-import android.support.annotation.NonNull;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.lemubit.lemuel.androidpayant.Payant;
-import com.lemubit.lemuel.androidpayant.api.PayantAPI;
+import com.lemubit.lemuel.androidpayant.api.Headers;
+import com.lemubit.lemuel.androidpayant.api.PayantApiService;
+import com.lemubit.lemuel.androidpayant.api.PayantApiClient;
 import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
 import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.DeletePayantClient;
 import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientInfo;
-import com.lemubit.lemuel.androidpayant.utils.GlobalStrings;
-
-import org.jetbrains.annotations.Contract;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * This class is the manager of all Payant Client operations
@@ -26,17 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class PayantClientManager {
 
-    private static Gson gson = new GsonBuilder()
-            .setLenient()
-            .create();
-
-    private static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(GlobalStrings.DEMO_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build();
-
-    private static PayantAPI payantAPI = retrofit.create(PayantAPI.class);
-
+    private static PayantApiService payantApiService = new PayantApiClient().getPayantApiService();
 
     /**
      * Save new Client information found in the PayantClient argument and
@@ -48,7 +30,7 @@ public class PayantClientManager {
      */
     public static void addPayantClient(PayantClient payantClient, final OnAddNewPayantClientListener onAddNewPayantClientListener) {
 
-        Call<PayantClientInfo> payantClientInfoCall = payantAPI.addClient(contentType(), authorization(), payantClient);
+        Call<PayantClientInfo> payantClientInfoCall = payantApiService.addClient(Headers.contentType(), Headers.authorization(), payantClient);
 
         payantClientInfoCall.enqueue(new Callback<PayantClientInfo>() {
             @Override
@@ -75,7 +57,7 @@ public class PayantClientManager {
     public static void getPayantClient(int clientID, final OnGetPayantClientListener onGetPayantClientListener) {
 
 
-        Call<PayantClientInfo> payantClientInfoCall = payantAPI.getClient(contentType(), authorization(), clientID);
+        Call<PayantClientInfo> payantClientInfoCall = payantApiService.getClient(Headers.contentType(), Headers.authorization(), clientID);
 
         payantClientInfoCall.enqueue(new Callback<PayantClientInfo>() {
             @Override
@@ -102,7 +84,7 @@ public class PayantClientManager {
      * @param onEditPayantClientListener Listens for network call response.
      */
     public static void editPayantClient(int clientID, PayantClient payantClient, final OnEditPayantClientListener onEditPayantClientListener) {
-        Call<PayantClientInfo> payantClientInfoCall = payantAPI.editClient(contentType(), authorization(), clientID, payantClient);
+        Call<PayantClientInfo> payantClientInfoCall = payantApiService.editClient(Headers.contentType(), Headers.authorization(), clientID, payantClient);
 
         payantClientInfoCall.enqueue(new Callback<PayantClientInfo>() {
             @Override
@@ -128,7 +110,7 @@ public class PayantClientManager {
      */
     public static void deletePayantClient(int clientID, final OnDeletePayantClientListener onDeletePayantClientListener) {
 
-        Call<DeletePayantClient> deletePayantClientCall = payantAPI.deleteClient(contentType(), authorization(), clientID);
+        Call<DeletePayantClient> deletePayantClientCall = payantApiService.deleteClient(Headers.contentType(), Headers.authorization(), clientID);
         deletePayantClientCall.enqueue(new Callback<DeletePayantClient>() {
             @Override
             public void onResponse(Call<DeletePayantClient> call, Response<DeletePayantClient> response) {
@@ -142,39 +124,72 @@ public class PayantClientManager {
         });
     }
 
-    @NonNull
-    @Contract(pure = true)
-    private static String contentType() {
-        return "application/json";
-    }
-
-    @NonNull
-    private static String authorization() {
-        return "Bearer " + Payant.getPrivateKey();
-    }
-
     public interface OnAddNewPayantClientListener {
+        /**
+         * Get response when an attempt to add a Client is made.
+         * Does not guarantee that the operation was successful, check the payantClientInfo status and message to confirm.
+         *
+         * @param payantClientInfo
+         */
         void onClientAdded(PayantClientInfo payantClientInfo);
 
+
+        /**
+         * Invoked when unexpected exceptions or network exception occurs
+         *
+         * @param t
+         */
         void onFailure(Throwable t);
     }
 
     public interface OnGetPayantClientListener {
+        /**
+         * Get response when an attempt to get a Client's info is made.
+         * Does not guarantee that the operation was successful, check the payantClientInfo status and message to confirm.
+         *
+         * @param payantClientInfo
+         */
         void onGetClient(PayantClientInfo payantClientInfo);
 
+        /**
+         * Invoked when unexpected exceptions or network exception occurs
+         *
+         * @param t
+         */
         void onFailure(Throwable t);
     }
 
-
     public interface OnEditPayantClientListener {
+        /**
+         * Get response when an attempt to edit a Client's info is made.
+         * Does not guarantee that the operation was successful, check the payantClientInfo status and message to confirm.
+         *
+         * @param payantClientInfo
+         */
         void onClientEdited(PayantClientInfo payantClientInfo);
 
+        /**
+         * Invoked when unexpected exceptions or network exception occurs
+         *
+         * @param t
+         */
         void onFailure(Throwable t);
     }
 
     public interface OnDeletePayantClientListener {
+        /**
+         * Get response when an attempt to delete a Client's info is made.
+         * Does not guarantee that the operation was successful, check the payantClientInfo status and message to confirm.
+         *
+         * @param deletePayantClient
+         */
         void onClientDeleted(DeletePayantClient deletePayantClient);
 
+        /**
+         * Invoked when unexpected exceptions or network exception occurs
+         *
+         * @param t
+         */
         void onFailure(Throwable t);
     }
 }
