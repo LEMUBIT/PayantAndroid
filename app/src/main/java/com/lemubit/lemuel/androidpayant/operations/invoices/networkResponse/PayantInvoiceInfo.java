@@ -1,9 +1,9 @@
 package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 
 public class PayantInvoiceInfo {
-    String status;
-    String message;
-    Data data;
+    private String status;
+    private String message;
+    private Data data;
 
     public String getStatus() {
         return status;

@@ -1,29 +1,32 @@
 package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 
+/**
+ * @author lemuel
+ */
 public class Client {
-    String id;
-    String company_id;
-    String name;
-    String first_name;
-    String last_name;
-    String email;
-    String phone;
-    String website;
-    String address;
-    String type;
-    String settlement_bank;
-    String account_name;
-    String account_number;
-    String status;
-    String created_at;
-    String updated_at;
-    String deleted_at;
+    private String id;
+    private String company_id;
+    private String name;
+    private String first_name;
+    private String last_name;
+    private String email;
+    private String phone;
+    private String website;
+    private String address;
+    private String type;
+    private String settlement_bank;
+    private String account_name;
+    private String account_number;
+    private String status;
+    private String created_at;
+    private String updated_at;
+    private String deleted_at;
 
     public String getId() {
         return id;
     }
 
-    public String getCompany_id() {
+    public String getcompanyId() {
         return company_id;
     }
 
@@ -31,11 +34,11 @@ public class Client {
         return name;
     }
 
-    public String getFirst_name() {
+    public String getfirstName() {
         return first_name;
     }
 
-    public String getLast_name() {
+    public String getlastName() {
         return last_name;
     }
 
@@ -59,15 +62,15 @@ public class Client {
         return type;
     }
 
-    public String getSettlement_bank() {
+    public String getsettlementBank() {
         return settlement_bank;
     }
 
-    public String getAccount_name() {
+    public String getaccountName() {
         return account_name;
     }
 
-    public String getAccount_number() {
+    public String getaccountNumber() {
         return account_number;
     }
 
@@ -75,15 +78,15 @@ public class Client {
         return status;
     }
 
-    public String getCreated_at() {
+    public String getcreatedAt() {
         return created_at;
     }
 
-    public String getUpdated_at() {
+    public String getupdatedAt() {
         return updated_at;
     }
 
-    public String getDeleted_at() {
+    public String getdeletedAt() {
         return deleted_at;
     }
 

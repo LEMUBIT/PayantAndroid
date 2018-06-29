@@ -67,6 +67,14 @@ public interface PayantApiService {
     Call<DeletePayantClient> deleteClient(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("id") int clientID);
 
 
+    /**
+     * Save new Invoice information found in the PayantInvoice argument
+     *
+     * @param contentType
+     * @param authorization
+     * @param payantInvoice
+     * @return
+     */
     @POST("invoices")
     Call<PayantInvoiceInfo> addInvoice(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantInvoice payantInvoice);
 }

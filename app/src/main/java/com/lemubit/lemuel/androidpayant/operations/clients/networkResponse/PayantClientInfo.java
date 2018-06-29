@@ -2,6 +2,7 @@ package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse;
 
 /**
  * Contains the Payant client information, used when performing operations with PayantClientManager
+ *
  * @author lemuel
  */
 public class PayantClientInfo {

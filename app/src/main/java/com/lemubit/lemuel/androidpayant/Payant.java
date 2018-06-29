@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Contract;
  * @author lemuel
  */
 public final class Payant {
-    public static Context applicationContext;
+    private static Context applicationContext;
 
     private static boolean payantInitialized = false;
 

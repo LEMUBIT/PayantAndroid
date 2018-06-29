@@ -7,16 +7,16 @@ import com.lemubit.lemuel.androidpayant.annotation.PayantRequired;
  */
 public class PayantInvoiceItem {
     @PayantRequired
-    String item;
+    private String item;
 
     @PayantRequired
-    String description;
+    private String description;
 
     @PayantRequired
-    String unit_cost;
+    private String unit_cost;
 
     @PayantRequired
-    String quantity;
+    private String quantity;
 
     public PayantInvoiceItem(String item, String description, String unit_cost, String quantity) {
         this.item = item;

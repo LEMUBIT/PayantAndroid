@@ -2,6 +2,7 @@ package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse;
 
 /**
  * Contains the status and message of a delete operation using PayantClientManager
+ *
  * @author lemuel
  */
 public class DeletePayantClient {

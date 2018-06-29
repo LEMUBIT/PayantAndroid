@@ -3,20 +3,20 @@ package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 import java.util.List;
 
 public class Data {
-    String id;
-    String company_id;
-    String client_id;
-    String reference_code;
-    String payment_id;
-    String fee_bearer;
-    String mail_status;
-    String status;
-    String due_date;
-    String created_at;
-    String updated_at;
-    String deleted_at;
-    Client client;
-    List<Item> items;
+    private String id;
+    private String company_id;
+    private String client_id;
+    private String reference_code;
+    private String payment_id;
+    private String fee_bearer;
+    private String mail_status;
+    private String status;
+    private String due_date;
+    private String created_at;
+    private String updated_at;
+    private String deleted_at;
+    private Client client;
+    private List<Item> items;
 
     public String getId() {
         return id;

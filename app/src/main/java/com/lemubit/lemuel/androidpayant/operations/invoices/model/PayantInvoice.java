@@ -13,31 +13,31 @@ import java.util.List;
 public class PayantInvoice {
 
     @PayantRequired
-    PayantClient client;
+    private PayantClient client;
 
     @PayantRequired
-    String client_id;
+    private String client_id;
 
     @PayantRequired
-    String due_date;
+    private String due_date;
 
     @PayantRequired
-    String fee_bearer;
+    private String fee_bearer;
 
-    String tokenize;
+    private String tokenize;
 
-    String card_token;
+    private String card_token;
 
     @PayantRequired
-    List<PayantInvoiceItem> items;
+    private List<PayantInvoiceItem> items;
 
-    String recipient;
+    private String recipient;
 
-    String recipient_id;
+    private String recipient_id;
 
-    String merchant_ref;
+    private String merchant_ref;
 
-    String metadata;
+    private String metadata;
 
     public PayantInvoice() {
     }

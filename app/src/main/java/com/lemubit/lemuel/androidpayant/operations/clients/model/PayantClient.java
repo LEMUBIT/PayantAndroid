@@ -9,58 +9,93 @@ import com.lemubit.lemuel.androidpayant.annotation.PayantRequired;
  */
 public class PayantClient {
 
-    String company_name = "";
+    private String company_name = "";
 
     @PayantRequired
-    String first_name = "";
+    private String first_name = "";
 
     @PayantRequired
-    String last_name = "";
+    private String last_name = "";
 
     @PayantRequired
-    String email = "";
+    private String email = "";
 
     @PayantRequired
-    String phone = "";
+    private String phone = "";
 
 
-    String address = "";
+    private String address = "";
 
 
-    String type = "";
+    private String type = "";
 
 
-    String settlement_bank = "";
+    private String settlement_bank = "";
 
 
-    String account_number = "";
+    private String account_number = "";
 
     public PayantClient() {
     }
 
 
-    public PayantClient(String first_name, String last_name, String email, String phone) {
-        this("", first_name, last_name, email, phone, "", "", "", "");
+    /**
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param phone
+     */
+    public PayantClient(String firstName, String lastName, String email, String phone) {
+        this("", firstName, lastName, email, phone, "", "", "", "");
     }
 
-    public PayantClient(String first_name, String last_name, String email, String phone, String address, String type) {
-        this("", first_name, last_name, email, phone, address, type, "", "");
+    /**
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param phone
+     * @param address
+     * @param type
+     */
+    public PayantClient(String firstName, String lastName, String email, String phone, String address, String type) {
+        this("", firstName, lastName, email, phone, address, type, "", "");
     }
 
-    public PayantClient(String first_name, String last_name, String email, String phone, String address, String type, String settlement_bank, String account_number) {
-        this("", first_name, last_name, email, phone, address, type, settlement_bank, account_number);
+    /**
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param phone
+     * @param address
+     * @param type
+     * @param settlementBank
+     * @param accountNumber
+     */
+    public PayantClient(String firstName, String lastName, String email, String phone, String address, String type, String settlementBank, String accountNumber) {
+        this("", firstName, lastName, email, phone, address, type, settlementBank, accountNumber);
     }
 
-    public PayantClient(String company_name, String first_name, String last_name, String email, String phone, String address, String type, String settlement_bank, String account_number) {
-        this.company_name = company_name;
-        this.first_name = first_name;
-        this.last_name = last_name;
+    /**
+     * @param companyName
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param phone
+     * @param address
+     * @param type
+     * @param settlementBank
+     * @param accountNumber
+     */
+    public PayantClient(String companyName, String firstName, String lastName, String email, String phone, String address, String type, String settlementBank, String accountNumber) {
+        this.company_name = companyName;
+        this.first_name = firstName;
+        this.last_name = lastName;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.type = type;
-        this.settlement_bank = settlement_bank;
-        this.account_number = account_number;
+        this.settlement_bank = settlementBank;
+        this.account_number = accountNumber;
     }
 
     public String getCompany_name() {
@@ -168,10 +203,10 @@ public class PayantClient {
     /**
      * Set client's settlement bank
      *
-     * @param settlement_bank
+     * @param settlementBank
      */
-    public void setsettlementBank(String settlement_bank) {
-        this.settlement_bank = settlement_bank;
+    public void setsettlementBank(String settlementBank) {
+        this.settlement_bank = settlementBank;
     }
 
     public String getaccountNumber() {
@@ -181,10 +216,10 @@ public class PayantClient {
     /**
      * Set client's account number
      *
-     * @param account_number
+     * @param accountNumber
      */
-    public void setaccountNumber(String account_number) {
-        this.account_number = account_number;
+    public void setaccountNumber(String accountNumber) {
+        this.account_number = accountNumber;
     }
 
     @Override
