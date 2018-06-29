@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         //PayantClient payantClient = new PayantClient();
         Payant.init(this);
         Payant.init(this);
-        Payant.setPrivateKey("3c93c4f1b8b264400c39f86db1c31b8add76121a1a37f1f0c2d52b3d");
+        Payant.setPrivateKey(getString(R.string.pKey));
 
         PayantClient payantClient = new PayantClient();
         payantClient.setFirstName("Lemubit");
