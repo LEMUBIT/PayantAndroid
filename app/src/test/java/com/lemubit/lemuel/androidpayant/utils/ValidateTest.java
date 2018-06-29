@@ -37,7 +37,7 @@ public class ValidateTest {
         Payant.getPrivateKey();
     }
 
-    @Test(expected = PayantNotInitializedException.class)
+    @Test
     public void attemptSetPrivateKey() {
         Payant.setPrivateKey("0000");
     }
