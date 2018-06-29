@@ -2,6 +2,9 @@ package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 
 import java.util.List;
 
+/**
+ * @author lemuel
+ */
 public class Data {
     private String id;
     private String company_id;

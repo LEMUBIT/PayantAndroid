@@ -42,35 +42,11 @@ public class PayantInvoice {
     public PayantInvoice() {
     }
 
-    public PayantInvoice(PayantClient client, String clientId, String dueDate, String feeBearer, String tokenize, String cardToken, List<PayantInvoiceItem> items, String recipient, String recipientId, String merchantRef, String metadata) {
+    public PayantInvoice(PayantClient client, String clientId, String dueDate, String feeBearer, List<PayantInvoiceItem> items) {
         this.client = client;
         this.client_id = clientId;
         this.due_date = dueDate;
         this.fee_bearer = feeBearer;
-        this.tokenize = tokenize;
-        this.card_token = cardToken;
-        this.items = items;
-        this.recipient = recipient;
-        this.recipient_id = recipientId;
-        this.merchant_ref = merchantRef;
-        this.metadata = metadata;
-    }
-
-    public PayantInvoice(PayantClient client, String clientId, String dueDate, String feeBearer, List<PayantInvoiceItem> items, String recipient, String recipientId) {
-        this.client = client;
-        this.client_id = clientId;
-        this.due_date = dueDate;
-        this.fee_bearer = feeBearer;
-        this.items = items;
-        this.recipient = recipient;
-        this.recipient_id = recipientId;
-    }
-
-    public PayantInvoice(PayantClient client, String client_id, String due_date, String fee_bearer, List<PayantInvoiceItem> items) {
-        this.client = client;
-        this.client_id = client_id;
-        this.due_date = due_date;
-        this.fee_bearer = fee_bearer;
         this.items = items;
     }
 

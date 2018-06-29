@@ -55,7 +55,7 @@ public final class Payant {
     }
 
     public static String getPrivateKey() throws PayantPrivateKeyNotSetException {
-        if (privateKeySet == false) {
+        if (!privateKeySet) {
             throw new PayantPrivateKeyNotSetException("Private key has not been set, please set private key after initializing the Payant SDK");
         }
 

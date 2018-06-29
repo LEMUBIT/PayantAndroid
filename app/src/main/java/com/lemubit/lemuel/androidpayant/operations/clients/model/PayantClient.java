@@ -38,7 +38,6 @@ public class PayantClient {
     public PayantClient() {
     }
 
-
     /**
      * @param firstName
      * @param lastName
@@ -46,69 +45,23 @@ public class PayantClient {
      * @param phone
      */
     public PayantClient(String firstName, String lastName, String email, String phone) {
-        this("", firstName, lastName, email, phone, "", "", "", "");
-    }
-
-    /**
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @param phone
-     * @param address
-     * @param type
-     */
-    public PayantClient(String firstName, String lastName, String email, String phone, String address, String type) {
-        this("", firstName, lastName, email, phone, address, type, "", "");
-    }
-
-    /**
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @param phone
-     * @param address
-     * @param type
-     * @param settlementBank
-     * @param accountNumber
-     */
-    public PayantClient(String firstName, String lastName, String email, String phone, String address, String type, String settlementBank, String accountNumber) {
-        this("", firstName, lastName, email, phone, address, type, settlementBank, accountNumber);
-    }
-
-    /**
-     * @param companyName
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @param phone
-     * @param address
-     * @param type
-     * @param settlementBank
-     * @param accountNumber
-     */
-    public PayantClient(String companyName, String firstName, String lastName, String email, String phone, String address, String type, String settlementBank, String accountNumber) {
-        this.company_name = companyName;
         this.first_name = firstName;
         this.last_name = lastName;
         this.email = email;
         this.phone = phone;
-        this.address = address;
-        this.type = type;
-        this.settlement_bank = settlementBank;
-        this.account_number = accountNumber;
     }
 
-    public String getCompany_name() {
+    public String getcompanyName() {
         return company_name;
     }
 
     /**
      * Set client's company name
      *
-     * @param company_name
+     * @param companyName
      */
-    public void setCompany_name(String company_name) {
-        this.company_name = company_name;
+    public void setcompanyName(String companyName) {
+        this.company_name = companyName;
     }
 
     public String getFirstName() {
@@ -119,11 +72,11 @@ public class PayantClient {
     /**
      * Set client's first name
      *
-     * @param first_name
+     * @param firstName
      */
     @PayantRequired
-    public void setFirstName(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.first_name = firstName;
     }
 
     public String getLastName() {
@@ -133,11 +86,11 @@ public class PayantClient {
     /**
      * Set client's last name
      *
-     * @param last_name
+     * @param lastName
      */
     @PayantRequired
-    public void setLastName(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.last_name = lastName;
     }
 
     public String getEmail() {
