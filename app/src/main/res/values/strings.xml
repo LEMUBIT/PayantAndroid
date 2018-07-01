@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Android-Payant</string>
     <string name="pKey">3c93c4f1b8b264400c39f86db1c31b8add76121a1a37f1f0c2d52b3d</string>
+    <string name="payantInitializedWarningTitle">Payant Warning</string>
+    <string name="payantInitializedWarningDescription">Payant has already been initialized, you need to initialize just once!</string>
+    <string name="payantKeyNotSet">Private key has not been set, please set private key after initializing the Payant SDK</string>
+    <string name="applicationContext">applicationContext</string>
 </resources>

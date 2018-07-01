@@ -30,11 +30,10 @@ public final class Payant {
      */
     public static void init(Context applicationContext) {
 
-
         if (payantInitialized) {
-            Log.w("Payant Warning","Payant has already been initialized, you need to initialize just once!");
+            Log.w(applicationContext.getString(R.string.payantInitializedWarningTitle), applicationContext.getString(R.string.payantInitializedWarningDescription));
         } else {
-            Validate.valueNotNull(applicationContext, "applicationContext");
+            Validate.valueNotNull(applicationContext, applicationContext.getString(R.string.applicationContext));
 
             Validate.internetPermissionAvailable(applicationContext);
 
@@ -56,7 +55,7 @@ public final class Payant {
 
     public static String getPrivateKey() throws PayantPrivateKeyNotSetException {
         if (!privateKeySet) {
-            throw new PayantPrivateKeyNotSetException("Private key has not been set, please set private key after initializing the Payant SDK");
+            throw new PayantPrivateKeyNotSetException(applicationContext.getString(R.string.payantKeyNotSet));
         }
 
         return PRIVATE_KEY;
