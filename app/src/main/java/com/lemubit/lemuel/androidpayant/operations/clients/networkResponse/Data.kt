@@ -1,5 +1,8 @@
 package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse
 
+/**
+ * @author lemuel
+ */
 class Data {
     val company_id: String? = null
     val name: String? = null

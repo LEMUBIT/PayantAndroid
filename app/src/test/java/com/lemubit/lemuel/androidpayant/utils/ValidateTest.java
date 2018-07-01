@@ -1,14 +1,33 @@
 package com.lemubit.lemuel.androidpayant.utils;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+
 import com.lemubit.lemuel.androidpayant.Payant;
 import com.lemubit.lemuel.androidpayant.exceptions.PayantNotInitializedException;
 import com.lemubit.lemuel.androidpayant.exceptions.PayantPrivateKeyNotSetException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.mockito.Mockito.when;
+
 public class ValidateTest {
+
+    @Mock
+    private
+    Context mockContext;
+
+    @Mock
+    private
+    PackageManager mockPackageManager;
+
+    @Mock
+    private Package mockPackage;
+
 
     @Before
     public void setup() {
@@ -28,12 +47,25 @@ public class ValidateTest {
 
     @Test(expected = PayantPrivateKeyNotSetException.class)
     public void checkPrivateKeySet() {
+        when(mockPackageManager.checkPermission(Manifest.permission.INTERNET, mockPackage.getName()))
+                .thenReturn(PackageManager.PERMISSION_GRANTED);
+
+        when(mockContext.getPackageManager()).thenReturn(mockPackageManager);
+
+        Payant.init(mockContext);
+
         Payant.getPrivateKey();
     }
 
-    @Test(expected = PayantNotInitializedException.class)
-    public void attemptSetPrivateKey() {
-        Payant.setPrivateKey("0000");
+    @Test(expected = IllegalStateException.class)
+    public void checkNoInternetPermission() {
+        when(mockPackageManager.checkPermission(Manifest.permission.INTERNET, mockPackage.getName()))
+                .thenReturn(PackageManager.PERMISSION_DENIED);
+
+        when(mockContext.getPackageManager()).thenReturn(mockPackageManager);
+
+        Payant.init(mockContext);
+
     }
 
 }

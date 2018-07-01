@@ -15,6 +15,11 @@ import org.jetbrains.annotations.Contract;
 public class Validate {
 
 
+    /**
+     * Check if Payant SDK has been initialized
+     *
+     * @throws PayantNotInitializedException
+     */
     public static void payantInitialized() throws PayantNotInitializedException {
         if (!Payant.isPayantInitialized()) {
             throw new PayantNotInitializedException("Payant SDK has not been initialized. Use 'Payant.init()' to initialize.");

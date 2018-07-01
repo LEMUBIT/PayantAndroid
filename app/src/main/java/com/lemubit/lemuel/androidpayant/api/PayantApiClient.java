@@ -2,7 +2,7 @@ package com.lemubit.lemuel.androidpayant.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.lemubit.lemuel.androidpayant.utils.GlobalStrings;
+import com.lemubit.lemuel.androidpayant.utils.Url;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -19,7 +19,7 @@ public class PayantApiClient {
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(GlobalStrings.DEMO_BASE_URL)
+                .baseUrl(Url.DEMO_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         payantApiService = retrofit.create(PayantApiService.class);
