@@ -1,5 +1,7 @@
 package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse;
 
+import com.lemubit.lemuel.androidpayant.utils.StatusString;
+
 /**
  * Contains the Payant client information, used when performing operations with PayantClientManager
  *
@@ -22,6 +24,10 @@ public class PayantClientInfo {
         return data;
     }
 
+    public Boolean isSuccessful()
+    {
+        return status.equals(StatusString.PASSED);
+    }
     @Override
     public String toString() {
         return "PayantClientResponse{" +

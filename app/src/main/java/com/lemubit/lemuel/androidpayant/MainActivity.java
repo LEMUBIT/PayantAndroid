@@ -6,12 +6,7 @@ import android.util.Log;
 
 import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
 import com.lemubit.lemuel.androidpayant.operations.invoices.PayantInvoiceManager;
-import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoice;
-import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoiceItem;
-import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceInfo;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.SendPayantInvoice;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,35 +20,26 @@ public class MainActivity extends AppCompatActivity {
         Payant.setPrivateKey(getString(R.string.pKey));
 
         PayantClient payantClient = new PayantClient();
-        payantClient.setFirstName("Lemubit");
-        payantClient.setLastName("Ogbunude");
+        payantClient.setFirstName("Chibueze");
+        payantClient.setLastName("OGBUNUDE");
         payantClient.setPhone("+23409094435323");
-        payantClient.setEmail("charlesfree7@yahoo.com");
-        int id = 169;
+        payantClient.setEmail("lemuelcco@gmail.com.com");
+        int id = 166;
 
-
-        PayantInvoice payantInvoice = new PayantInvoice();
-        payantInvoice.setclientId(String.valueOf(id));
-        payantInvoice.setClient(payantClient);
-        payantInvoice.setdueDate("30/06/2018");
-        payantInvoice.setfeeBearer("client");
-        payantInvoice.setmerchantRef("lol");
-        List<PayantInvoiceItem> payantInvoiceItemList = new ArrayList<>();
-        payantInvoiceItemList.add(new PayantInvoiceItem("football", "very nice stuff", "1000", "1"));
-        payantInvoice.setItems(payantInvoiceItemList);
-
-        PayantInvoiceManager.addPayantInvoice(payantInvoice, new PayantInvoiceManager.OnAddNewPayantInvoiceListener() {
+        PayantInvoiceManager.sendPayantInvoice("RtmyviMcYWXIlJh3axQZ", new PayantInvoiceManager.OnSendInvoiceListener() {
             @Override
-            public void onInvoiceAdded(PayantInvoiceInfo payantInvoiceInfo) {
-                Log.i("Payant Invoice good!", payantInvoiceInfo.toString());
+            public void onManagerResponse(SendPayantInvoice sendPayantInvoice) {
+                Log.e("Payant Invoice", sendPayantInvoice.toString());
+                Log.e("Payant Invoice", sendPayantInvoice.isSuccessful().toString());
             }
+
 
             @Override
             public void onFailure(Throwable t) {
-                Log.i("Payant Invoice Error!", t.getStackTrace().toString());
+
+                Log.e("Payant Invoice", t.getMessage());
             }
         });
-
 
     }
 

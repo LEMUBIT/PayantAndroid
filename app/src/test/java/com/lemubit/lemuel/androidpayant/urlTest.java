@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class UrlTest {
+public class urlTest {
     @Test
     public void UrlIntact() {
         assertEquals(Url.BASE_URL, "https://api.payant.ng/");

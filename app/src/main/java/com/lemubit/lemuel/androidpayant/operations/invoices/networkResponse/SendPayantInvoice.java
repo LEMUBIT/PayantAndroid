@@ -2,10 +2,12 @@ package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
-public class PayantInvoiceInfo {
+/**
+ * @author lemuel
+ */
+public class SendPayantInvoice {
     private String status;
     private String message;
-    private Data data;
 
     public String getStatus() {
         return status;
@@ -15,21 +17,15 @@ public class PayantInvoiceInfo {
         return message;
     }
 
-    public Data getData() {
-        return data;
-    }
-
-    public Boolean isSuccessful()
-    {
+    public Boolean isSuccessful() {
         return status.equals(StatusString.PASSED);
     }
 
     @Override
     public String toString() {
-        return "PayantInvoiceInfo{" +
+        return "SendPayantInvoice{" +
                 "status='" + status + '\'' +
                 ", message='" + message + '\'' +
-                ", data=" + data +
                 '}';
     }
 }

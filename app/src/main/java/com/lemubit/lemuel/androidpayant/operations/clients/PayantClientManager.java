@@ -1,8 +1,9 @@
 package com.lemubit.lemuel.androidpayant.operations.clients;
 
 import com.lemubit.lemuel.androidpayant.api.Headers;
-import com.lemubit.lemuel.androidpayant.api.PayantApiService;
 import com.lemubit.lemuel.androidpayant.api.PayantApiClient;
+import com.lemubit.lemuel.androidpayant.api.PayantApiService;
+import com.lemubit.lemuel.androidpayant.exceptions.PayantServerException;
 import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
 import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.DeletePayantClient;
 import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientInfo;
@@ -35,7 +36,11 @@ public class PayantClientManager {
         payantClientInfoCall.enqueue(new Callback<PayantClientInfo>() {
             @Override
             public void onResponse(Call<PayantClientInfo> call, Response<PayantClientInfo> response) {
-                onAddNewPayantClientListener.onClientAdded(response.body());
+                if (response.isSuccessful()) {
+                    onAddNewPayantClientListener.onManagerResponse(response.body());
+                } else {
+                    onAddNewPayantClientListener.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
             }
 
             @Override
@@ -62,7 +67,11 @@ public class PayantClientManager {
         payantClientInfoCall.enqueue(new Callback<PayantClientInfo>() {
             @Override
             public void onResponse(Call<PayantClientInfo> call, Response<PayantClientInfo> response) {
-                onGetPayantClientListener.onGetClient(response.body());
+                if (response.isSuccessful()) {
+                    onGetPayantClientListener.onManagerResponse(response.body());
+                } else {
+                    onGetPayantClientListener.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
             }
 
             @Override
@@ -72,7 +81,6 @@ public class PayantClientManager {
         });
 
     }
-
 
     /**
      * Update client identified using clientID with information contained in PayantClient object
@@ -89,7 +97,11 @@ public class PayantClientManager {
         payantClientInfoCall.enqueue(new Callback<PayantClientInfo>() {
             @Override
             public void onResponse(Call<PayantClientInfo> call, Response<PayantClientInfo> response) {
-                onEditPayantClientListener.onClientEdited(response.body());
+                if (response.isSuccessful()) {
+                    onEditPayantClientListener.onManagerResponse(response.body());
+                } else {
+                    onEditPayantClientListener.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
             }
 
             @Override
@@ -99,7 +111,6 @@ public class PayantClientManager {
         });
 
     }
-
 
     /**
      * Delete a client identified using clientID and notify {@code OnDeletePayantClientListener} of its
@@ -114,7 +125,11 @@ public class PayantClientManager {
         deletePayantClientCall.enqueue(new Callback<DeletePayantClient>() {
             @Override
             public void onResponse(Call<DeletePayantClient> call, Response<DeletePayantClient> response) {
-                onDeletePayantClientListener.onClientDeleted(response.body());
+                if (response.isSuccessful()) {
+                    onDeletePayantClientListener.onManagerResponse(response.body());
+                } else {
+                    onDeletePayantClientListener.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
             }
 
             @Override
@@ -126,13 +141,12 @@ public class PayantClientManager {
 
     public interface OnAddNewPayantClientListener {
         /**
-         * Get response when an attempt to add a Client is made.
-         * Does not guarantee that the operation was successful, check the payantClientInfo status and message to confirm.
+         * Invoked when a Payant response is received
+         * Note: Does not guarantee that the operation was successful. Call {@code PayantClientInfo.isSuccessful()} to confirm.
          *
          * @param payantClientInfo
          */
-        void onClientAdded(PayantClientInfo payantClientInfo);
-
+        void onManagerResponse(PayantClientInfo payantClientInfo);
 
         /**
          * Invoked when unexpected exceptions or network exception occurs
@@ -144,12 +158,12 @@ public class PayantClientManager {
 
     public interface OnGetPayantClientListener {
         /**
-         * Get response when an attempt to get a Client's info is made.
-         * Does not guarantee that the operation was successful, check the payantClientInfo status and message to confirm.
+         * Invoked when a Payant response is received
+         * Note: Does not guarantee that the operation was successful. Call {@code PayantClientInfo.isSuccessful()} to confirm.
          *
          * @param payantClientInfo
          */
-        void onGetClient(PayantClientInfo payantClientInfo);
+        void onManagerResponse(PayantClientInfo payantClientInfo);
 
         /**
          * Invoked when unexpected exceptions or network exception occurs
@@ -161,12 +175,12 @@ public class PayantClientManager {
 
     public interface OnEditPayantClientListener {
         /**
-         * Get response when an attempt to edit a Client's info is made.
-         * Does not guarantee that the operation was successful, check the payantClientInfo status and message to confirm.
+         * Invoked when a Payant response is received
+         * Note: Does not guarantee that the operation was successful. Call {@code PayantClientInfo.isSuccessful()} to confirm.
          *
          * @param payantClientInfo
          */
-        void onClientEdited(PayantClientInfo payantClientInfo);
+        void onManagerResponse(PayantClientInfo payantClientInfo);
 
         /**
          * Invoked when unexpected exceptions or network exception occurs
@@ -178,12 +192,12 @@ public class PayantClientManager {
 
     public interface OnDeletePayantClientListener {
         /**
-         * Get response when an attempt to delete a Client's info is made.
-         * Does not guarantee that the operation was successful, check the payantClientInfo status and message to confirm.
+         * Invoked when a Payant response is received
+         * Note: Does not guarantee that the operation was successful. Call {@code DeletePayantClient.isSuccessful()} to confirm.
          *
          * @param deletePayantClient
          */
-        void onClientDeleted(DeletePayantClient deletePayantClient);
+        void onManagerResponse(DeletePayantClient deletePayantClient);
 
         /**
          * Invoked when unexpected exceptions or network exception occurs

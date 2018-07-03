@@ -1,5 +1,7 @@
 package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse;
 
+import com.lemubit.lemuel.androidpayant.utils.StatusString;
+
 /**
  * Contains the status and message of a delete operation using PayantClientManager
  *
@@ -15,6 +17,11 @@ public class DeletePayantClient {
 
     public String getMessage() {
         return message;
+    }
+
+    public Boolean isSuccessful()
+    {
+        return status.equals(StatusString.PASSED);
     }
 
     @Override
