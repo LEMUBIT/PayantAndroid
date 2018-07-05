@@ -1,5 +1,8 @@
 package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 
+/**
+ * @author lemuel
+ */
 public class Item {
     private String id;
     private String company_id;

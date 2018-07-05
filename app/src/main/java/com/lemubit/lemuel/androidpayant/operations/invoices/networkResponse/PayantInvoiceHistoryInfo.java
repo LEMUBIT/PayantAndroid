@@ -3,24 +3,20 @@ package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
 /**
- * This is the model of the response for Invoice operations such as adding invoice or getting invoice information.
+ * This is the model of the response when invoice history is requested
+ * {@code HistoryData} will contain the list of past invoices
  *
  * @author lemuel
  */
-public class PayantInvoiceInfo {
+public class PayantInvoiceHistoryInfo {
     private String status;
-    private String message;
-    private Data data;
+    private HistoryData data;
 
     public String getStatus() {
         return status;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public Data getData() {
+    public HistoryData getData() {
         return data;
     }
 
@@ -30,9 +26,8 @@ public class PayantInvoiceInfo {
 
     @Override
     public String toString() {
-        return "PayantInvoiceInfo{" +
+        return "PayantInvoiceHistoryInfo{" +
                 "status='" + status + '\'' +
-                ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';
     }

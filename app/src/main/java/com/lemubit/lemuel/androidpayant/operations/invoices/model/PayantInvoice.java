@@ -56,9 +56,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Set invoice Client Data
-     *
-     * @param client
+     * @param client invoice Client Data
      */
     public void setClient(PayantClient client) {
         this.client = client;
@@ -69,9 +67,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Set invoice Client ID
-     *
-     * @param clientId
+     * @param clientId invoice Client
      */
     public void setclientId(String clientId) {
         this.client_id = clientId;
@@ -82,9 +78,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Set invoice due date (MM/DD/YYYY).
-     *
-     * @param dueDate
+     * @param dueDate invoice due date (MM/DD/YYYY)
      */
     public void setdueDate(String dueDate) {
         this.due_date = dueDate;
@@ -95,9 +89,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Set invoice fee bearer (account or client)
-     *
-     * @param feeBearer
+     * @param feeBearer invoice fee bearer (account or client)
      */
     public void setfeeBearer(String feeBearer) {
         this.fee_bearer = feeBearer;
@@ -108,9 +100,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Tokenize card used to make payment for this invoice (true or false). Defaults to (false).
-     *
-     * @param tokenize
+     * @param tokenize Tokenize card used to make payment for this invoice (true or false). Defaults to (false)
      */
     public void setTokenize(String tokenize) {
         this.tokenize = tokenize;
@@ -121,9 +111,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Card token generated from a tokenized transaction to automatically make payment for this invoice.
-     *
-     * @param cardToken
+     * @param cardToken Card token generated from a tokenized transaction to automatically make payment for this invoice
      */
     public void setcardToken(String cardToken) {
         this.card_token = cardToken;
@@ -134,9 +122,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Set invoice items
-     *
-     * @param items
+     * @param items invoice items
      */
     public void setItems(List<PayantInvoiceItem> items) {
         this.items = items;
@@ -147,9 +133,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Invoice payment recipient (account or wallet) Defaults to (account).
-     *
-     * @param recipient
+     * @param recipient Invoice payment recipient (account or wallet) Defaults to (account)
      */
     public void setRecipient(String recipient) {
         this.recipient = recipient;
@@ -160,9 +144,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Invoice payment recipient id (Wallet Ref.) Required if recipient is wallet
-     *
-     * @param recipientId
+     * @param recipientId Invoice payment recipient id (Wallet Ref.) Required if recipient is wallet
      */
     public void setrecipientId(String recipientId) {
         this.recipient_id = recipientId;
@@ -173,9 +155,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Merchant's unique invoice reference code
-     *
-     * @param merchantRef
+     * @param merchantRef Merchant's unique invoice reference code
      */
     public void setmerchantRef(String merchantRef) {
         this.merchant_ref = merchantRef;
@@ -186,9 +166,7 @@ public class PayantInvoice {
     }
 
     /**
-     * Key-value pairs object
-     *
-     * @param metadata
+     * @param metadata Key-value pairs object
      */
     public void setMetadata(String metadata) {
         this.metadata = metadata;

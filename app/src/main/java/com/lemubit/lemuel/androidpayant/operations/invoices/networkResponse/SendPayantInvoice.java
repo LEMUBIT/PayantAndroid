@@ -3,6 +3,8 @@ package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
 /**
+ * This is the model of the response when an Invoice is sent to a customer.
+ *
  * @author lemuel
  */
 public class SendPayantInvoice {

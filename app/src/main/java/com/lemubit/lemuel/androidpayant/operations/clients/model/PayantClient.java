@@ -39,10 +39,10 @@ public class PayantClient {
     }
 
     /**
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @param phone
+     * @param firstName client's first name
+     * @param lastName  client's last name
+     * @param email     client's email address
+     * @param phone     client's phone number
      */
     public PayantClient(String firstName, String lastName, String email, String phone) {
         this.first_name = firstName;
@@ -56,9 +56,7 @@ public class PayantClient {
     }
 
     /**
-     * Set client's company name
-     *
-     * @param companyName
+     * @param companyName client's company name
      */
     public void setcompanyName(String companyName) {
         this.company_name = companyName;
@@ -70,9 +68,7 @@ public class PayantClient {
 
 
     /**
-     * Set client's first name
-     *
-     * @param firstName
+     * @param firstName client's first name
      */
     @PayantRequired
     public void setFirstName(String firstName) {
@@ -84,9 +80,7 @@ public class PayantClient {
     }
 
     /**
-     * Set client's last name
-     *
-     * @param lastName
+     * @param lastName client's last name
      */
     @PayantRequired
     public void setLastName(String lastName) {
@@ -98,9 +92,7 @@ public class PayantClient {
     }
 
     /**
-     * Set client's email address
-     *
-     * @param email
+     * @param email client's email address
      */
     @PayantRequired
     public void setEmail(String email) {
@@ -112,11 +104,10 @@ public class PayantClient {
     }
 
     /**
-     * Set client's phone number
      * <p>
      * Note: Use international phone Number format
      *
-     * @param phone
+     * @param phone client's phone number
      */
     @PayantRequired
     public void setPhone(String phone) {
@@ -128,9 +119,7 @@ public class PayantClient {
     }
 
     /**
-     * Set client's address
-     *
-     * @param address
+     * @param address client's address
      */
     public void setAddress(String address) {
         this.address = address;
@@ -141,9 +130,7 @@ public class PayantClient {
     }
 
     /**
-     * Set client's type Customer, Staff or Vendor
-     *
-     * @param type
+     * @param type client's type Customer, Staff or Vendor
      */
     public void setType(String type) {
         this.type = type;
@@ -154,9 +141,7 @@ public class PayantClient {
     }
 
     /**
-     * Set client's settlement bank
-     *
-     * @param settlementBank
+     * @param settlementBank client's settlement bank
      */
     public void setsettlementBank(String settlementBank) {
         this.settlement_bank = settlementBank;
@@ -167,9 +152,7 @@ public class PayantClient {
     }
 
     /**
-     * Set client's account number
-     *
-     * @param accountNumber
+     * @param accountNumber client's account number
      */
     public void setaccountNumber(String accountNumber) {
         this.account_number = accountNumber;

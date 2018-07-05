@@ -18,10 +18,10 @@ public class PayantInvoiceItem {
     @PayantRequired
     private String quantity;
 
-    public PayantInvoiceItem(String item, String description, String unit_cost, String quantity) {
+    public PayantInvoiceItem(String item, String description, String unitCost, String quantity) {
         this.item = item;
         this.description = description;
-        this.unit_cost = unit_cost;
+        this.unit_cost = unitCost;
         this.quantity = quantity;
     }
 
@@ -33,8 +33,7 @@ public class PayantInvoiceItem {
     }
 
     /**
-     * Set item's name
-     * @param item
+     * @param item item's name
      */
     public void setItem(String item) {
         this.item = item;
@@ -45,8 +44,7 @@ public class PayantInvoiceItem {
     }
 
     /**
-     * Set item's description
-     * @param description
+     * @param description item's description
      */
     public void setDescription(String description) {
         this.description = description;
@@ -57,11 +55,10 @@ public class PayantInvoiceItem {
     }
 
     /**
-     * Set item's unit cost
-     * @param unit_cost
+     * @param unitCost item's unit cost
      */
-    public void setunitCost(String unit_cost) {
-        this.unit_cost = unit_cost;
+    public void setunitCost(String unitCost) {
+        this.unit_cost = unitCost;
     }
 
     public String getQuantity() {
@@ -69,8 +66,7 @@ public class PayantInvoiceItem {
     }
 
     /**
-     * Set item's quantity
-     * @param quantity
+     * @param quantity item's quantity
      */
     public void setQuantity(String quantity) {
         this.quantity = quantity;
