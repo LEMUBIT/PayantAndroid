@@ -1,4 +1,4 @@
-package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
+package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model;
 
 import java.util.List;
 

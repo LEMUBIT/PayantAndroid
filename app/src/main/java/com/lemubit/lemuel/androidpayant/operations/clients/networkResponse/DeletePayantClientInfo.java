@@ -1,13 +1,13 @@
-package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
+package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse;
 
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
 /**
- * This is the model of the response when an Invoice is sent to a customer.
+ * Contains the status and message of a delete operation using PayantClientManager
  *
  * @author lemuel
  */
-public class SendPayantInvoice {
+public class DeletePayantClientInfo {
     private String status;
     private String message;
 
@@ -19,13 +19,14 @@ public class SendPayantInvoice {
         return message;
     }
 
-    public Boolean isSuccessful() {
+    public Boolean isSuccessful()
+    {
         return status.equals(StatusString.PASSED);
     }
 
     @Override
     public String toString() {
-        return "SendPayantInvoice{" +
+        return "DeletePayantClient{" +
                 "status='" + status + '\'' +
                 ", message='" + message + '\'' +
                 '}';

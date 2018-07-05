@@ -1,11 +1,14 @@
 package com.lemubit.lemuel.androidpayant.api;
 
 import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
-import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.DeletePayantClient;
+import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.DeletePayantClientInfo;
 import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoice;
+import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoiceHistory;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.DeletePayantInvoiceInfo;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceHistoryInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceInfo;
-import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.SendPayantInvoice;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.SendPayantInvoiceInfo;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -61,7 +64,7 @@ public interface PayantApiService {
      * @param clientID
      */
     @DELETE("clients/{id}")
-    Call<DeletePayantClient> deleteClient(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("id") int clientID);
+    Call<DeletePayantClientInfo> deleteClient(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("id") int clientID);
 
 
     /**
@@ -76,6 +79,7 @@ public interface PayantApiService {
 
     /**
      * Get invoice information using the invoice Reference Code.
+     *
      * @param contentType
      * @param authorization
      * @param invoiceReferenceCode
@@ -86,13 +90,33 @@ public interface PayantApiService {
 
     /**
      * Send invoice with Reference Code: {@code invoiceReferenceCode}.
+     *
      * @param contentType
      * @param authorization
      * @param invoiceReferenceCode
-     * @return
      */
     @GET("invoices/send/{reference_code}")
-    Call<SendPayantInvoice> sendInvoice(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String invoiceReferenceCode);
+    Call<SendPayantInvoiceInfo> sendInvoice(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String invoiceReferenceCode);
 
+
+    /**
+     * Get payant invoice history using the parameters found in {@code PayantInvoiceHistory}
+     *
+     * @param contentType
+     * @param authorization
+     * @param payantInvoiceHistory
+     */
+    @POST("/invoices/history")
+    Call<PayantInvoiceHistoryInfo> getInvoiceHistory(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantInvoiceHistory payantInvoiceHistory);
+
+    /**
+     * Delete invoice with reference code {@code referenceCode}
+     *
+     * @param contentType
+     * @param authorization
+     * @param referenceCode
+     */
+    @DELETE("invoices/{reference_code}")
+    Call<DeletePayantInvoiceInfo> deleteInvoice(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String referenceCode);
 
 }

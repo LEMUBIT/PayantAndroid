@@ -8,14 +8,36 @@ import com.lemubit.lemuel.androidpayant.annotation.PayantRequired;
 public class PayantInvoiceHistory {
     @PayantRequired
     private String period;
+
     private String start;
+
     private String end;
+
+    /**
+     * @param period History period today, week, month, 30, 90, year or custom
+     */
+    public PayantInvoiceHistory(String period) {
+        this.period = period;
+    }
+
+    /**
+     * @param period History period today, week, month, 30, 90, year or custom
+     * @param start  Starting date DD/MM/YYYY
+     * @param end    End date DD/MM/YYYY
+     */
+    public PayantInvoiceHistory(String period, String start, String end) {
+        this.period = period;
+        this.start = start;
+        this.end = end;
+    }
 
     public String getPeriod() {
         return period;
     }
 
     /**
+     * Note: If you set the period to be custom, then you need to set the time period fo the start and end date
+     *
      * @param period History period today, week, month, 30, 90, year or custom
      */
     public void setPeriod(String period) {

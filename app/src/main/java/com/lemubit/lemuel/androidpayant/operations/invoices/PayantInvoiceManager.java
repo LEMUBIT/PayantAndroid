@@ -5,8 +5,11 @@ import com.lemubit.lemuel.androidpayant.api.PayantApiClient;
 import com.lemubit.lemuel.androidpayant.api.PayantApiService;
 import com.lemubit.lemuel.androidpayant.exceptions.PayantServerException;
 import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoice;
+import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoiceHistory;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.DeletePayantInvoiceInfo;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceHistoryInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceInfo;
-import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.SendPayantInvoice;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.SendPayantInvoiceInfo;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,12 +82,18 @@ public class PayantInvoiceManager {
     }
 
 
+    /**
+     * Send invoice with reference code {@code invoiceReferenceCode} to client's email
+     *
+     * @param invoiceReferenceCode  Reference code of desired invoice
+     * @param onSendInvoiceListener Listens for network call response.
+     */
     public static void sendPayantInvoice(String invoiceReferenceCode, final OnSendInvoiceListener onSendInvoiceListener) {
-        Call<SendPayantInvoice> sendPayantInvoiceCall = payantApiService.sendInvoice(Headers.contentType(), Headers.authorization(), invoiceReferenceCode);
+        Call<SendPayantInvoiceInfo> sendPayantInvoiceCall = payantApiService.sendInvoice(Headers.contentType(), Headers.authorization(), invoiceReferenceCode);
 
-        sendPayantInvoiceCall.enqueue(new Callback<SendPayantInvoice>() {
+        sendPayantInvoiceCall.enqueue(new Callback<SendPayantInvoiceInfo>() {
             @Override
-            public void onResponse(Call<SendPayantInvoice> call, Response<SendPayantInvoice> response) {
+            public void onResponse(Call<SendPayantInvoiceInfo> call, Response<SendPayantInvoiceInfo> response) {
                 if (response.isSuccessful()) {
                     onSendInvoiceListener.onManagerResponse(response.body());
                 } else {
@@ -93,12 +102,62 @@ public class PayantInvoiceManager {
             }
 
             @Override
-            public void onFailure(Call<SendPayantInvoice> call, Throwable t) {
+            public void onFailure(Call<SendPayantInvoiceInfo> call, Throwable t) {
                 onSendInvoiceListener.onFailure(t);
             }
         });
     }
 
+    /**
+     * Get payant invoice history using the parameters found in {@code PayantInvoiceHistory}
+     *
+     * @param payantInvoiceHistory        Contains information used to search for invoice history
+     * @param onGetInvoiceHistoryListener Listens for network call response
+     */
+    public static void getPayantInvoiceHistory(PayantInvoiceHistory payantInvoiceHistory, final OnGetInvoiceHistoryListener onGetInvoiceHistoryListener) {
+        Call<PayantInvoiceHistoryInfo> payantInvoiceHistoryInfoCall = payantApiService.getInvoiceHistory(Headers.contentType(), Headers.authorization(), payantInvoiceHistory);
+        payantInvoiceHistoryInfoCall.enqueue(new Callback<PayantInvoiceHistoryInfo>() {
+            @Override
+            public void onResponse(Call<PayantInvoiceHistoryInfo> call, Response<PayantInvoiceHistoryInfo> response) {
+                if (response.isSuccessful()) {
+                    onGetInvoiceHistoryListener.onManagerResponse(response.body());
+                } else {
+                    onGetInvoiceHistoryListener.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PayantInvoiceHistoryInfo> call, Throwable t) {
+                onGetInvoiceHistoryListener.onFailure(t);
+            }
+        });
+    }
+
+    /**
+     * Delete invoice with reference code {@code invoiceReferenceCode}
+     *
+     * @param invoiceReferenceCode    Reference code of desired invoice
+     * @param onDeleteInvoiceListener Listens for network call response
+     */
+    public static void deletePayantInvoice(String invoiceReferenceCode, final OnDeleteInvoiceListener onDeleteInvoiceListener) {
+        Call<DeletePayantInvoiceInfo> deletePayantInvoiceInfoCall = payantApiService.deleteInvoice(Headers.contentType(), Headers.authorization(), invoiceReferenceCode);
+
+        deletePayantInvoiceInfoCall.enqueue(new Callback<DeletePayantInvoiceInfo>() {
+            @Override
+            public void onResponse(Call<DeletePayantInvoiceInfo> call, Response<DeletePayantInvoiceInfo> response) {
+                if (response.isSuccessful()) {
+                    onDeleteInvoiceListener.onManagerResponse(response.body());
+                } else {
+                    onDeleteInvoiceListener.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DeletePayantInvoiceInfo> call, Throwable t) {
+                onDeleteInvoiceListener.onFailure(t);
+            }
+        });
+    }
 
     public interface OnAddNewPayantInvoiceListener {
         /**
@@ -136,13 +195,50 @@ public class PayantInvoiceManager {
 
     public interface OnSendInvoiceListener {
 
+
         /**
          * Invoked when a Payant response is received
-         * Note: Does not guarantee that the operation was successful. Call {@code SendPayantInvoice.isSuccessful()} to confirm.
+         * Note: Does not guarantee that the operation was successful. Call {@code SendPayantInvoiceInfo.isSuccessful()} to confirm.
          *
-         * @param sendPayantInvoice
+         * @param sendPayantInvoiceInfo Contains message of operation status, success or failure
          */
-        void onManagerResponse(SendPayantInvoice sendPayantInvoice);
+        void onManagerResponse(SendPayantInvoiceInfo sendPayantInvoiceInfo);
+
+        /**
+         * Invoked when unexpected exceptions or network exception occurs
+         *
+         * @param t Throwable
+         */
+        void onFailure(Throwable t);
+    }
+
+    public interface OnGetInvoiceHistoryListener {
+
+        /**
+         * Note: Does not guarantee that the operation was successful. Call {@code PayantInvoiceHistoryInfo.isSuccessful()} to confirm.
+         *
+         * @param payantInvoiceHistoryInfo Contains information of requested list of invoices
+         */
+        void onManagerResponse(PayantInvoiceHistoryInfo payantInvoiceHistoryInfo);
+
+
+        /**
+         * Invoked when unexpected exceptions or network exception occurs
+         *
+         * @param t Throwable
+         */
+        void onFailure(Throwable t);
+    }
+
+
+    public interface OnDeleteInvoiceListener {
+
+        /**
+         * Note: Does not guarantee that the operation was successful. Call {@code DeletePayantInvoiceInfo.isSuccessful()} to confirm.
+         *
+         * @param deletePayantInvoiceInfo Contains message of operation status, success or failure
+         */
+        void onManagerResponse(DeletePayantInvoiceInfo deletePayantInvoiceInfo);
 
         /**
          * Invoked when unexpected exceptions or network exception occurs

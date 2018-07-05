@@ -1,17 +1,13 @@
-package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse;
+package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 
-import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.model.Data;
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
 /**
- * Contains the Payant client information, used when performing operations with PayantClientManager
- *
  * @author lemuel
  */
-public class PayantClientInfo {
+public class DeletePayantInvoiceInfo {
     private String status;
     private String message;
-    private Data data;
 
     public String getStatus() {
         return status;
@@ -21,20 +17,17 @@ public class PayantClientInfo {
         return message;
     }
 
-    public Data getData() {
-        return data;
-    }
-
-    public Boolean isSuccessful()
-    {
+    public Boolean isSuccessful() {
         return status.equals(StatusString.PASSED);
     }
+
     @Override
     public String toString() {
-        return "PayantClientResponse{" +
+        return "DeletePayantInvoiceInfo{" +
                 "status='" + status + '\'' +
                 ", message='" + message + '\'' +
-                ", data=" + data +
                 '}';
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model.Data;
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
 /**
