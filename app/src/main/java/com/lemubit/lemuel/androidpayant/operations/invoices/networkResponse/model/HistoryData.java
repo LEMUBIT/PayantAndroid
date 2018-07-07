@@ -10,7 +10,7 @@ public class HistoryData {
     private String period;
     private String start;
     private String end;
-    private List<InvoiceData> invoices;
+    private List<InvoiceDataAndClient> invoices;
 
     public String getPeriod() {
         return period;
@@ -24,7 +24,7 @@ public class HistoryData {
         return end;
     }
 
-    public List<InvoiceData> getInvoices() {
+    public List<InvoiceDataAndClient> getInvoices() {
         return invoices;
     }
 

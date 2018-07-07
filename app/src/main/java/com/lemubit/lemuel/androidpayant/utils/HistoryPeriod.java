@@ -1,5 +1,8 @@
 package com.lemubit.lemuel.androidpayant.utils;
 
+/**
+ * @author lemuel
+ */
 public class HistoryPeriod {
     public static String TODAY="today";
     public static String PAST_WEEK="week";

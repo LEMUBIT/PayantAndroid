@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
-import com.lemubit.lemuel.androidpayant.operations.invoices.PayantInvoiceManager;
-import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.DeletePayantInvoiceInfo;
+import com.lemubit.lemuel.androidpayant.operations.payments.PayantPaymentManager;
+import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.PayantPaymentInfo;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,18 +26,19 @@ public class MainActivity extends AppCompatActivity {
         payantClient.setEmail("lemuelcco@gmail.com.com");
         int id = 166;
 
-        PayantInvoiceManager.deletePayantInvoice("sxemXolh3fdMKQNcJyv7", new PayantInvoiceManager.OnDeleteInvoiceListener() {
+        String invoiceID = "tq1SuVodBWYJic2MArb0";
+
+        PayantPaymentManager.getPayantPayment(invoiceID, new PayantPaymentManager.OnGetPayantPaymentListener() {
             @Override
-            public void onManagerResponse(DeletePayantInvoiceInfo deletePayantInvoiceInfo) {
-                Log.e("DELETE", deletePayantInvoiceInfo.toString());
+            public void onManagerResponse(PayantPaymentInfo payantPaymentInfo) {
+                Log.e("PAYANTINFO", payantPaymentInfo.toString());
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.e("DELETE ERROR", t.getMessage());
+                Log.e("PAYANTINFO", t.getMessage());
             }
         });
-
     }
 
 

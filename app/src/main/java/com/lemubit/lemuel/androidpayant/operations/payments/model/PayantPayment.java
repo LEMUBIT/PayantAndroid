@@ -25,7 +25,7 @@ public class PayantPayment {
 
     /**
      * @param referenceCode Invoice reference code
-     * @param date          Payment date (MM/DD/YYYY
+     * @param date          Payment date (MM/DD/YYYY)
      * @param amount        Payment amount
      * @param channel       Payment channel (Cash, BankTransfer, POS or Cheque
      */

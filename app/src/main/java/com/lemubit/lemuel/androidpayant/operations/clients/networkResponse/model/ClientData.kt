@@ -3,22 +3,44 @@ package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.mode
 /**
  * @author lemuel
  */
-class ClientData {
-    val company_id: String? = null
+open class ClientData {
+    @get:JvmName("getCompanyId")
+     val company_id: String? = null
+
     val name: String? = null
+    @get:JvmName("getFirstName")
     val first_name: String? = null
+
+    @get:JvmName("getLastName")
     val last_name: String? = null
+
     val email: String? = null
+
     val phone: String? = null
+
     val website: String? = null
+
     val address: String? = null
+
     val type: String? = null
+
+    @get:JvmName("getSettlementBank")
     val settlement_bank: String? = null
+
+    @get:JvmName("getAccountName")
     val account_name: String? = null
+
+    @get:JvmName("getAccountNumber")
     val account_number: String? = null
+
     val status: String? = null
+
+    @get:JvmName("getTimeCreated")
     val created_at: String? = null
+
+    @get:JvmName("getTimeUpdated")
     val updated_at: String? = null
+
     val id: String? = null
 
     override fun toString(): String {

@@ -1,7 +1,7 @@
 package com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.model;
 
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model.Client;
-import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.model.InvoiceData;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model.InvoiceData;
 
 /**
  * @author lemuel
@@ -25,8 +25,9 @@ public class PaymentData {
     private String created_at;
     private String updated_at;
     private String id;
-    private Client client;
     private InvoiceData invoice;
+    private Client client;
+
 
     public String getcompanyId() {
         return company_id;
@@ -100,13 +101,14 @@ public class PaymentData {
         return id;
     }
 
+    public InvoiceData getInvoice() {
+        return invoice;
+    }
+
     public Client getClient() {
         return client;
     }
 
-    public InvoiceData getInvoice() {
-        return invoice;
-    }
 
     @Override
     public String toString() {

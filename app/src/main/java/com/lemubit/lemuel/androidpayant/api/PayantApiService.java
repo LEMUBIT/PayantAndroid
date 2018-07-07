@@ -9,6 +9,8 @@ import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.Dele
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceHistoryInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.SendPayantInvoiceInfo;
+import com.lemubit.lemuel.androidpayant.operations.payments.model.PayantPayment;
+import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.PayantPaymentInfo;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -25,7 +27,7 @@ import retrofit2.http.Path;
 public interface PayantApiService {
 
     /**
-     * Save new Client information found in the PayantClient object.
+     * Save new Client information found in {@code PayantClient}.
      *
      * @param contentType
      * @param authorization
@@ -68,7 +70,7 @@ public interface PayantApiService {
 
 
     /**
-     * Save new Invoice information found in the PayantInvoice argument.
+     * Save new Invoice information found in {@code PayantInvoice}.
      *
      * @param contentType
      * @param authorization
@@ -118,5 +120,27 @@ public interface PayantApiService {
      */
     @DELETE("invoices/{reference_code}")
     Call<DeletePayantInvoiceInfo> deleteInvoice(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String referenceCode);
+
+
+    /**
+     * Add new Payment with information found in {@code PayantPayment}
+     *
+     * @param contentType
+     * @param authorization
+     * @param payantPayment
+     */
+    @POST("payments")
+    Call<PayantPaymentInfo> addPayment(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantPayment payantPayment);
+
+
+    /**
+     * Get payment information using the payment Reference Code {@code paymentReferenceCode}.
+     *
+     * @param contentType
+     * @param authorization
+     * @param paymentReferenceCode
+     */
+    @GET("payments/{reference_code}")
+    Call<PayantPaymentInfo> getPayment(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String paymentReferenceCode);
 
 }

@@ -24,7 +24,7 @@ public class PayantInvoiceManager {
 
 
     /**
-     * Save new Invoice information found in the PayantInvoice argument and
+     * Add new Invoice information found in the PayantInvoice argument and
      * notify {@code OnAddNewPayantInvoiceListener} of its response or if an error
      * occurred.
      *

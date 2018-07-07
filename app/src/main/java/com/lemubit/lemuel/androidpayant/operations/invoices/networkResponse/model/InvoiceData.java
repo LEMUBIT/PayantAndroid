@@ -18,7 +18,6 @@ public class InvoiceData {
     private String created_at;
     private String updated_at;
     private String deleted_at;
-    private Client client;
     private List<Item> items;
 
     public String getId() {
@@ -69,9 +68,6 @@ public class InvoiceData {
         return deleted_at;
     }
 
-    public Client getClient() {
-        return client;
-    }
 
     public List<Item> getItems() {
         return items;
@@ -79,7 +75,7 @@ public class InvoiceData {
 
     @Override
     public String toString() {
-        return "Data{" +
+        return "InvoiceData{" +
                 "id='" + id + '\'' +
                 ", company_id='" + company_id + '\'' +
                 ", client_id='" + client_id + '\'' +
@@ -92,7 +88,6 @@ public class InvoiceData {
                 ", created_at='" + created_at + '\'' +
                 ", updated_at='" + updated_at + '\'' +
                 ", deleted_at='" + deleted_at + '\'' +
-                ", client=" + client +
                 ", items=" + items +
                 '}';
     }

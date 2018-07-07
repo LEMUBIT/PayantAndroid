@@ -1,6 +1,7 @@
 package com.lemubit.lemuel.androidpayant.operations.payments.networkResponse;
 
 import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.model.PaymentData;
+import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
 /**
  * @author lemuel
@@ -20,6 +21,10 @@ public class PayantPaymentInfo {
 
     public PaymentData getData() {
         return data;
+    }
+
+    public Boolean isSuccessful() {
+        return status.equals(StatusString.PASSED);
     }
 
     @Override
