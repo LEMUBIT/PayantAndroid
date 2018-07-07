@@ -42,6 +42,13 @@ public class PayantInvoice {
     public PayantInvoice() {
     }
 
+    /**
+     * @param client    Invoice Client Data
+     * @param clientId  Invoice Client ID
+     * @param dueDate   Invoice due date (MM/DD/YYYY)
+     * @param feeBearer Invoice fee bearer (account or client)
+     * @param items     Invoice items
+     */
     public PayantInvoice(PayantClient client, String clientId, String dueDate, String feeBearer, List<PayantInvoiceItem> items) {
         this.client = client;
         this.client_id = clientId;
@@ -67,7 +74,7 @@ public class PayantInvoice {
     }
 
     /**
-     * @param clientId invoice Client
+     * @param clientId invoice Client ID
      */
     public void setclientId(String clientId) {
         this.client_id = clientId;

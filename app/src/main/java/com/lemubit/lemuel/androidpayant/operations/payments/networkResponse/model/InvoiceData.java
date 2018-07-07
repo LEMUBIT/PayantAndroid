@@ -1,11 +1,14 @@
-package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model;
+package com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.model;
+
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model.Client;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model.Item;
 
 import java.util.List;
 
 /**
  * @author lemuel
  */
-public class Data {
+public class InvoiceData {
     private String id;
     private String company_id;
     private String client_id;
@@ -18,7 +21,6 @@ public class Data {
     private String created_at;
     private String updated_at;
     private String deleted_at;
-    private Client client;
     private List<Item> items;
 
     public String getId() {
@@ -69,17 +71,13 @@ public class Data {
         return deleted_at;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
     public List<Item> getItems() {
         return items;
     }
 
     @Override
     public String toString() {
-        return "Data{" +
+        return "InvoiceData{" +
                 "id='" + id + '\'' +
                 ", company_id='" + company_id + '\'' +
                 ", client_id='" + client_id + '\'' +
@@ -92,7 +90,6 @@ public class Data {
                 ", created_at='" + created_at + '\'' +
                 ", updated_at='" + updated_at + '\'' +
                 ", deleted_at='" + deleted_at + '\'' +
-                ", client=" + client +
                 ", items=" + items +
                 '}';
     }

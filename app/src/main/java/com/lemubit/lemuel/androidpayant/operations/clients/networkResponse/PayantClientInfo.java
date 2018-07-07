@@ -1,6 +1,6 @@
 package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse;
 
-import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.model.Data;
+import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.model.ClientData;
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
 /**
@@ -11,7 +11,7 @@ import com.lemubit.lemuel.androidpayant.utils.StatusString;
 public class PayantClientInfo {
     private String status;
     private String message;
-    private Data data;
+    private ClientData data;
 
     public String getStatus() {
         return status;
@@ -21,7 +21,7 @@ public class PayantClientInfo {
         return message;
     }
 
-    public Data getData() {
+    public ClientData getData() {
         return data;
     }
 

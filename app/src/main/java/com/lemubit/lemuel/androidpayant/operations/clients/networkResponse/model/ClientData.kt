@@ -3,7 +3,7 @@ package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.mode
 /**
  * @author lemuel
  */
-class Data {
+class ClientData {
     val company_id: String? = null
     val name: String? = null
     val first_name: String? = null

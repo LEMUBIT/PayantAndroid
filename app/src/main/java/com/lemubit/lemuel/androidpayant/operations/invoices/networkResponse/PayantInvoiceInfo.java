@@ -1,6 +1,6 @@
 package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
 
-import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model.Data;
+import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model.InvoiceData;
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
 /**
@@ -11,7 +11,7 @@ import com.lemubit.lemuel.androidpayant.utils.StatusString;
 public class PayantInvoiceInfo {
     private String status;
     private String message;
-    private Data data;
+    private InvoiceData data;
 
     public String getStatus() {
         return status;
@@ -21,7 +21,7 @@ public class PayantInvoiceInfo {
         return message;
     }
 
-    public Data getData() {
+    public InvoiceData getData() {
         return data;
     }
 

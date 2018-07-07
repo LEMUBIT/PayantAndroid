@@ -1,6 +1,5 @@
 package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model;
 
-import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.model.Data;
 
 import java.util.List;
 
@@ -8,10 +7,10 @@ import java.util.List;
  * @author lemuel
  */
 public class HistoryData {
-    String period;
-    String start;
-    String end;
-    List<Data> invoices;
+    private String period;
+    private String start;
+    private String end;
+    private List<InvoiceData> invoices;
 
     public String getPeriod() {
         return period;
@@ -25,7 +24,7 @@ public class HistoryData {
         return end;
     }
 
-    public List<Data> getInvoices() {
+    public List<InvoiceData> getInvoices() {
         return invoices;
     }
 
