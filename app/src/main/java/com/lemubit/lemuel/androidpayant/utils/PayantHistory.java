@@ -1,11 +1,11 @@
-package com.lemubit.lemuel.androidpayant.operations.invoices.model;
+package com.lemubit.lemuel.androidpayant.utils;
 
 import com.lemubit.lemuel.androidpayant.annotation.PayantRequired;
 
 /**
  * @author lemuel
  */
-public class PayantInvoiceHistory {
+public class PayantHistory {
     @PayantRequired
     private String period;
 
@@ -16,7 +16,7 @@ public class PayantInvoiceHistory {
     /**
      * @param period History period today, week, month, 30, 90, year or custom
      */
-    public PayantInvoiceHistory(String period) {
+    public PayantHistory(String period) {
         this.period = period;
     }
 
@@ -25,7 +25,7 @@ public class PayantInvoiceHistory {
      * @param start  Starting date DD/MM/YYYY
      * @param end    End date DD/MM/YYYY
      */
-    public PayantInvoiceHistory(String period, String start, String end) {
+    public PayantHistory(String period, String start, String end) {
         this.period = period;
         this.start = start;
         this.end = end;

@@ -5,7 +5,9 @@ import com.lemubit.lemuel.androidpayant.api.PayantApiClient;
 import com.lemubit.lemuel.androidpayant.api.PayantApiService;
 import com.lemubit.lemuel.androidpayant.exceptions.PayantServerException;
 import com.lemubit.lemuel.androidpayant.operations.payments.model.PayantPayment;
+import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.PayantPaymentHistoryInfo;
 import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.PayantPaymentInfo;
+import com.lemubit.lemuel.androidpayant.utils.PayantHistory;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,6 +71,32 @@ public class PayantPaymentManager {
         });
     }
 
+    //TODO Continue from here and polish
+    /**
+     * @param payantHistory
+     * @param onGetPayantHistoryListener
+     */
+    public static void getPayantPaymentHistory(PayantHistory payantHistory, final OnGetPayantHistoryListener onGetPayantHistoryListener) {
+        Call<PayantPaymentHistoryInfo> payantPaymentHistoryInfoCall = payantApiService.getPaymentHistory(Headers.contentType(), Headers.authorization(), payantHistory);
+
+        payantPaymentHistoryInfoCall.enqueue(new Callback<PayantPaymentHistoryInfo>() {
+            @Override
+            public void onResponse(Call<PayantPaymentHistoryInfo> call, Response<PayantPaymentHistoryInfo> response) {
+                if (response.isSuccessful()) {
+                    onGetPayantHistoryListener.onManagerResponse(response.body());
+                } else {
+                    onGetPayantHistoryListener.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PayantPaymentHistoryInfo> call, Throwable t) {
+                onGetPayantHistoryListener.onFailure(t);
+            }
+        });
+
+    }
+
     public interface OnAddNewPayantPaymentListener {
         /**
          * Invoked when a Payant response is received
@@ -99,6 +127,19 @@ public class PayantPaymentManager {
          * Invoked when unexpected exceptions or network exception occurs
          *
          * @param t Throwable
+         */
+        void onFailure(Throwable t);
+    }
+
+    public interface OnGetPayantHistoryListener {
+
+        /**
+         * @param payantPaymentHistoryInfo
+         */
+        void onManagerResponse(PayantPaymentHistoryInfo payantPaymentHistoryInfo);
+
+        /**
+         * @param t
          */
         void onFailure(Throwable t);
     }

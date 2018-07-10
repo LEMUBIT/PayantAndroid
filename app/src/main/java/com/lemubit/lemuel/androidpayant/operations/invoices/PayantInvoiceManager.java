@@ -4,8 +4,8 @@ import com.lemubit.lemuel.androidpayant.api.Headers;
 import com.lemubit.lemuel.androidpayant.api.PayantApiClient;
 import com.lemubit.lemuel.androidpayant.api.PayantApiService;
 import com.lemubit.lemuel.androidpayant.exceptions.PayantServerException;
+import com.lemubit.lemuel.androidpayant.utils.PayantHistory;
 import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoice;
-import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoiceHistory;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.DeletePayantInvoiceInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceHistoryInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceInfo;
@@ -109,13 +109,13 @@ public class PayantInvoiceManager {
     }
 
     /**
-     * Get payant invoice history using the parameters found in {@code PayantInvoiceHistory}
+     * Get payant invoice history using the parameters found in {@code PayantHistory}
      *
-     * @param payantInvoiceHistory        Contains information used to search for invoice history
+     * @param payantHistory        Contains information used to search for invoice history
      * @param onGetInvoiceHistoryListener Listens for network call response
      */
-    public static void getPayantInvoiceHistory(PayantInvoiceHistory payantInvoiceHistory, final OnGetInvoiceHistoryListener onGetInvoiceHistoryListener) {
-        Call<PayantInvoiceHistoryInfo> payantInvoiceHistoryInfoCall = payantApiService.getInvoiceHistory(Headers.contentType(), Headers.authorization(), payantInvoiceHistory);
+    public static void getPayantInvoiceHistory(PayantHistory payantHistory, final OnGetInvoiceHistoryListener onGetInvoiceHistoryListener) {
+        Call<PayantInvoiceHistoryInfo> payantInvoiceHistoryInfoCall = payantApiService.getInvoiceHistory(Headers.contentType(), Headers.authorization(), payantHistory);
         payantInvoiceHistoryInfoCall.enqueue(new Callback<PayantInvoiceHistoryInfo>() {
             @Override
             public void onResponse(Call<PayantInvoiceHistoryInfo> call, Response<PayantInvoiceHistoryInfo> response) {

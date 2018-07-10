@@ -4,13 +4,14 @@ import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
 import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.DeletePayantClientInfo;
 import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoice;
-import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoiceHistory;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.DeletePayantInvoiceInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceHistoryInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.SendPayantInvoiceInfo;
 import com.lemubit.lemuel.androidpayant.operations.payments.model.PayantPayment;
+import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.PayantPaymentHistoryInfo;
 import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.PayantPaymentInfo;
+import com.lemubit.lemuel.androidpayant.utils.PayantHistory;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -102,14 +103,14 @@ public interface PayantApiService {
 
 
     /**
-     * Get payant invoice history using the parameters found in {@code PayantInvoiceHistory}
+     * Get payant invoice history using the parameters found in {@code PayantHistory}
      *
      * @param contentType
      * @param authorization
-     * @param payantInvoiceHistory
+     * @param payantHistory
      */
     @POST("/invoices/history")
-    Call<PayantInvoiceHistoryInfo> getInvoiceHistory(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantInvoiceHistory payantInvoiceHistory);
+    Call<PayantInvoiceHistoryInfo> getInvoiceHistory(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantHistory payantHistory);
 
     /**
      * Delete invoice with reference code {@code referenceCode}
@@ -143,4 +144,11 @@ public interface PayantApiService {
     @GET("payments/{reference_code}")
     Call<PayantPaymentInfo> getPayment(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String paymentReferenceCode);
 
+    /**
+     * @param contentType
+     * @param authorization
+     * @param payantHistory
+     */
+    @POST("/payments/history")
+    Call<PayantPaymentHistoryInfo> getPaymentHistory(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantHistory payantHistory);
 }
