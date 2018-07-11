@@ -1,15 +1,16 @@
-package com.lemubit.lemuel.androidpayant.operations.clients.networkResponse;
+package com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse;
 
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
+import java.util.List;
+
 /**
- * Contains the status and message of a delete operation using PayantClientManager
- *
  * @author lemuel
  */
-public class DeletePayantClientInfo {
+public class PayantWalletInfoList {
     private String status;
     private String message;
+    private List<WalletData> data;
 
     public String getStatus() {
         return status;
@@ -19,16 +20,20 @@ public class DeletePayantClientInfo {
         return message;
     }
 
-    public Boolean isSuccessful()
-    {
+    public List<WalletData> getData() {
+        return data;
+    }
+
+    public Boolean isSuccessful() {
         return status.equals(StatusString.PASSED);
     }
 
     @Override
     public String toString() {
-        return "DeletePayantClient{" +
+        return "PayantWalletInfoList{" +
                 "status='" + status + '\'' +
                 ", message='" + message + '\'' +
+                ", data=" + data +
                 '}';
     }
 }

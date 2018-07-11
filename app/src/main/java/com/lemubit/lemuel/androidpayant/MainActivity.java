@@ -4,9 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.lemubit.lemuel.androidpayant.operations.OperationStatus;
 import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
-import com.lemubit.lemuel.androidpayant.operations.payments.PayantPaymentManager;
-import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.PayantPaymentInfo;
+import com.lemubit.lemuel.androidpayant.operations.wallets.PayantWalletManager;
+import com.lemubit.lemuel.androidpayant.operations.wallets.model.PassCodes;
+import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWallet;
+import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfo;
+import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfoList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,15 +32,15 @@ public class MainActivity extends AppCompatActivity {
 
         String invoiceID = "tq1SuVodBWYJic2MArb0";
 
-        PayantPaymentManager.getPayantPayment(invoiceID, new PayantPaymentManager.OnGetPayantPaymentListener() {
+        PayantWalletManager.getPayantWalletList(new PayantWalletManager.OnGetPayantWalletsListListener() {
             @Override
-            public void onManagerResponse(PayantPaymentInfo payantPaymentInfo) {
-                Log.e("PAYANTINFO", payantPaymentInfo.toString());
+            public void onManagerResponse(PayantWalletInfoList payantWalletInfoList) {
+                Log.e("Payant",payantWalletInfoList.toString());
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.e("PAYANTINFO", t.getMessage());
+                Log.e("Payant",t.getMessage());
             }
         });
     }

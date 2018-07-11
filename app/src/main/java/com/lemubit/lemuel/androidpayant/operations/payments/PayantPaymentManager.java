@@ -71,10 +71,12 @@ public class PayantPaymentManager {
         });
     }
 
-    //TODO Continue from here and polish
+
     /**
-     * @param payantHistory
-     * @param onGetPayantHistoryListener
+     * Get payment history information
+     *
+     * @param payantHistory              Contains parameters such as time frame used for search
+     * @param onGetPayantHistoryListener Listens for network call response.
      */
     public static void getPayantPaymentHistory(PayantHistory payantHistory, final OnGetPayantHistoryListener onGetPayantHistoryListener) {
         Call<PayantPaymentHistoryInfo> payantPaymentHistoryInfoCall = payantApiService.getPaymentHistory(Headers.contentType(), Headers.authorization(), payantHistory);
@@ -134,7 +136,10 @@ public class PayantPaymentManager {
     public interface OnGetPayantHistoryListener {
 
         /**
-         * @param payantPaymentHistoryInfo
+         * Invoked when a Payant response is received
+         * Note: Does not guarantee that the operation was successful. Call {@code PayantPaymentHistoryInfo.isSuccessful()} to confirm.
+         *
+         * @param payantPaymentHistoryInfo Contains information of payment history
          */
         void onManagerResponse(PayantPaymentHistoryInfo payantPaymentHistoryInfo);
 

@@ -13,7 +13,7 @@ public class InvoiceDataAndClient extends InvoiceData {
 
     @Override
     public String toString() {
-        return super.toString()+" InvoiceClient{" +
+        return super.toString() + " InvoiceClient{" +
                 "client=" + client +
                 '}';
     }

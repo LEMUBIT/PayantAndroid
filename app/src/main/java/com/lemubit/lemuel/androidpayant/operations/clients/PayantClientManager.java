@@ -5,7 +5,7 @@ import com.lemubit.lemuel.androidpayant.api.PayantApiClient;
 import com.lemubit.lemuel.androidpayant.api.PayantApiService;
 import com.lemubit.lemuel.androidpayant.exceptions.PayantServerException;
 import com.lemubit.lemuel.androidpayant.operations.clients.model.PayantClient;
-import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.DeletePayantClientInfo;
+import com.lemubit.lemuel.androidpayant.operations.OperationStatus;
 import com.lemubit.lemuel.androidpayant.operations.clients.networkResponse.PayantClientInfo;
 
 import retrofit2.Call;
@@ -121,10 +121,10 @@ public class PayantClientManager {
      */
     public static void deletePayantClient(int clientID, final OnDeletePayantClientListener onDeletePayantClientListener) {
 
-        Call<DeletePayantClientInfo> deletePayantClientCall = payantApiService.deleteClient(Headers.contentType(), Headers.authorization(), clientID);
-        deletePayantClientCall.enqueue(new Callback<DeletePayantClientInfo>() {
+        Call<OperationStatus> deletePayantClientCall = payantApiService.deleteClient(Headers.contentType(), Headers.authorization(), clientID);
+        deletePayantClientCall.enqueue(new Callback<OperationStatus>() {
             @Override
-            public void onResponse(Call<DeletePayantClientInfo> call, Response<DeletePayantClientInfo> response) {
+            public void onResponse(Call<OperationStatus> call, Response<OperationStatus> response) {
                 if (response.isSuccessful()) {
                     onDeletePayantClientListener.onManagerResponse(response.body());
                 } else {
@@ -133,7 +133,7 @@ public class PayantClientManager {
             }
 
             @Override
-            public void onFailure(Call<DeletePayantClientInfo> call, Throwable t) {
+            public void onFailure(Call<OperationStatus> call, Throwable t) {
                 onDeletePayantClientListener.onFailure(t);
             }
         });
@@ -195,9 +195,9 @@ public class PayantClientManager {
          * Invoked when a Payant response is received
          * Note: Does not guarantee that the operation was successful. Call {@code DeletePayantClient.isSuccessful()} to confirm.
          *
-         * @param deletePayantClientInfo
+         * @param operationStatus
          */
-        void onManagerResponse(DeletePayantClientInfo deletePayantClientInfo);
+        void onManagerResponse(OperationStatus operationStatus);
 
         /**
          * Invoked when unexpected exceptions or network exception occurs

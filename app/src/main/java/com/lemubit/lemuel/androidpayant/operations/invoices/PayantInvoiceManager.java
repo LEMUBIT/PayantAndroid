@@ -4,12 +4,11 @@ import com.lemubit.lemuel.androidpayant.api.Headers;
 import com.lemubit.lemuel.androidpayant.api.PayantApiClient;
 import com.lemubit.lemuel.androidpayant.api.PayantApiService;
 import com.lemubit.lemuel.androidpayant.exceptions.PayantServerException;
+import com.lemubit.lemuel.androidpayant.operations.OperationStatus;
 import com.lemubit.lemuel.androidpayant.utils.PayantHistory;
 import com.lemubit.lemuel.androidpayant.operations.invoices.model.PayantInvoice;
-import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.DeletePayantInvoiceInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceHistoryInfo;
 import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.PayantInvoiceInfo;
-import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.SendPayantInvoiceInfo;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -89,11 +88,11 @@ public class PayantInvoiceManager {
      * @param onSendInvoiceListener Listens for network call response.
      */
     public static void sendPayantInvoice(String invoiceReferenceCode, final OnSendInvoiceListener onSendInvoiceListener) {
-        Call<SendPayantInvoiceInfo> sendPayantInvoiceCall = payantApiService.sendInvoice(Headers.contentType(), Headers.authorization(), invoiceReferenceCode);
+        Call<OperationStatus> sendPayantInvoiceCall = payantApiService.sendInvoice(Headers.contentType(), Headers.authorization(), invoiceReferenceCode);
 
-        sendPayantInvoiceCall.enqueue(new Callback<SendPayantInvoiceInfo>() {
+        sendPayantInvoiceCall.enqueue(new Callback<OperationStatus>() {
             @Override
-            public void onResponse(Call<SendPayantInvoiceInfo> call, Response<SendPayantInvoiceInfo> response) {
+            public void onResponse(Call<OperationStatus> call, Response<OperationStatus> response) {
                 if (response.isSuccessful()) {
                     onSendInvoiceListener.onManagerResponse(response.body());
                 } else {
@@ -102,7 +101,7 @@ public class PayantInvoiceManager {
             }
 
             @Override
-            public void onFailure(Call<SendPayantInvoiceInfo> call, Throwable t) {
+            public void onFailure(Call<OperationStatus> call, Throwable t) {
                 onSendInvoiceListener.onFailure(t);
             }
         });
@@ -140,11 +139,11 @@ public class PayantInvoiceManager {
      * @param onDeleteInvoiceListener Listens for network call response
      */
     public static void deletePayantInvoice(String invoiceReferenceCode, final OnDeleteInvoiceListener onDeleteInvoiceListener) {
-        Call<DeletePayantInvoiceInfo> deletePayantInvoiceInfoCall = payantApiService.deleteInvoice(Headers.contentType(), Headers.authorization(), invoiceReferenceCode);
+        Call<OperationStatus> deletePayantInvoiceInfoCall = payantApiService.deleteInvoice(Headers.contentType(), Headers.authorization(), invoiceReferenceCode);
 
-        deletePayantInvoiceInfoCall.enqueue(new Callback<DeletePayantInvoiceInfo>() {
+        deletePayantInvoiceInfoCall.enqueue(new Callback<OperationStatus>() {
             @Override
-            public void onResponse(Call<DeletePayantInvoiceInfo> call, Response<DeletePayantInvoiceInfo> response) {
+            public void onResponse(Call<OperationStatus> call, Response<OperationStatus> response) {
                 if (response.isSuccessful()) {
                     onDeleteInvoiceListener.onManagerResponse(response.body());
                 } else {
@@ -153,7 +152,7 @@ public class PayantInvoiceManager {
             }
 
             @Override
-            public void onFailure(Call<DeletePayantInvoiceInfo> call, Throwable t) {
+            public void onFailure(Call<OperationStatus> call, Throwable t) {
                 onDeleteInvoiceListener.onFailure(t);
             }
         });
@@ -202,7 +201,7 @@ public class PayantInvoiceManager {
          *
          * @param sendPayantInvoiceInfo Contains message of operation status, success or failure
          */
-        void onManagerResponse(SendPayantInvoiceInfo sendPayantInvoiceInfo);
+        void onManagerResponse(OperationStatus sendPayantInvoiceInfo);
 
         /**
          * Invoked when unexpected exceptions or network exception occurs
@@ -238,7 +237,7 @@ public class PayantInvoiceManager {
          *
          * @param deletePayantInvoiceInfo Contains message of operation status, success or failure
          */
-        void onManagerResponse(DeletePayantInvoiceInfo deletePayantInvoiceInfo);
+        void onManagerResponse(OperationStatus deletePayantInvoiceInfo);
 
         /**
          * Invoked when unexpected exceptions or network exception occurs

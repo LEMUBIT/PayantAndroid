@@ -1,15 +1,14 @@
-package com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse;
+package com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse;
 
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
 /**
- * This is the model of the response when an Invoice is sent to a customer.
- *
  * @author lemuel
  */
-public class SendPayantInvoiceInfo {
+public class PayantWalletInfo {
     private String status;
     private String message;
+    private WalletData data;
 
     public String getStatus() {
         return status;
@@ -19,15 +18,20 @@ public class SendPayantInvoiceInfo {
         return message;
     }
 
+    public WalletData getData() {
+        return data;
+    }
+
     public Boolean isSuccessful() {
         return status.equals(StatusString.PASSED);
     }
 
     @Override
     public String toString() {
-        return "SendPayantInvoice{" +
+        return "PayantWalletInfo{" +
                 "status='" + status + '\'' +
                 ", message='" + message + '\'' +
+                ", data=" + data +
                 '}';
     }
 }
