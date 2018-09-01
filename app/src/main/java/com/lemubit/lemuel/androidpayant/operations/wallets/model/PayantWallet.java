@@ -12,6 +12,9 @@ public class PayantWallet {
     @PayantRequired
     private String passcode;
 
+    public PayantWallet() {
+    }
+
     /**
      * @param name     Wallets's name
      * @param passcode Wallets's passcode (min of 6 char)

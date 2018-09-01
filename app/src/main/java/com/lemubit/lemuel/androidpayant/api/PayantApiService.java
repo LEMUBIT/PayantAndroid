@@ -11,8 +11,10 @@ import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.Paya
 import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.PayantPaymentInfo;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PassCodes;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWallet;
+import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWalletWithdraw;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfo;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfoList;
+import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletWithdrawInfo;
 import com.lemubit.lemuel.androidpayant.utils.PayantHistory;
 
 import retrofit2.Call;
@@ -82,6 +84,7 @@ public interface PayantApiService {
     @POST("invoices")
     Call<PayantInvoiceInfo> addInvoice(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantInvoice payantInvoice);
 
+
     /**
      * Get invoice information using the invoice Reference Code.
      *
@@ -113,6 +116,7 @@ public interface PayantApiService {
      */
     @POST("/invoices/history")
     Call<PayantInvoiceHistoryInfo> getInvoiceHistory(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantHistory payantHistory);
+
 
     /**
      * Delete invoice with reference code {@code referenceCode}
@@ -146,6 +150,7 @@ public interface PayantApiService {
     @GET("payments/{reference_code}")
     Call<PayantPaymentInfo> getPayment(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String paymentReferenceCode);
 
+
     /**
      * Get payment history information
      *
@@ -167,6 +172,7 @@ public interface PayantApiService {
     @POST("wallets")
     Call<PayantWalletInfo> addWallet(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantWallet payantWallet);
 
+
     /**
      * Get payment information using the payment Reference Code {@code paymentReferenceCode}.
      *
@@ -176,6 +182,7 @@ public interface PayantApiService {
      */
     @GET("wallets/{reference_code}")
     Call<PayantWalletInfo> getWallet(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String walletReferenceCode);
+
 
     /**
      * Change passcode of wallet with reference code {@code walletReferenceCode} to passcode found in {@code passCodes}
@@ -197,4 +204,24 @@ public interface PayantApiService {
      */
     @GET("wallets")
     Call<PayantWalletInfoList> getWallets(@Header("Content-Type") String contentType, @Header("Authorization") String authorization);
+
+
+    /**
+     * Enable/Disable wallet
+     *
+     * @param contentType
+     * @param authorization
+     */
+    @GET("wallets/status/{reference_code}")
+    Call<OperationStatus> disableOrEnableWallet(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String walletReferenceCode);
+
+
+    /**
+     * @param contentType
+     * @param authorization
+     * @param walletReferenceCode
+     * @param payantWalletWithdraw
+     */
+    @POST("wallets/withdraw/{reference_code}")
+    Call<PayantWalletWithdrawInfo> withdrawFromWallet(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String walletReferenceCode, @Body PayantWalletWithdraw payantWalletWithdraw);
 }

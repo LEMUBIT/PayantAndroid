@@ -23,6 +23,9 @@ public class PayantPayment {
     private
     String channel;
 
+    public PayantPayment() {
+    }
+
     /**
      * @param referenceCode Invoice reference code
      * @param date          Payment date (MM/DD/YYYY)

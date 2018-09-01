@@ -7,8 +7,10 @@ import com.lemubit.lemuel.androidpayant.exceptions.PayantServerException;
 import com.lemubit.lemuel.androidpayant.operations.OperationStatus;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PassCodes;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWallet;
+import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWalletWithdraw;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfo;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfoList;
+import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletWithdrawInfo;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,7 +79,7 @@ public class PayantWalletManager {
     /**
      * Change passcode of wallet with reference code {@code walletReferenceCode} to passcode found in {@code passCodes}
      *
-     * @param walletReferenceCode            Reference code of desired wall
+     * @param walletReferenceCode            Reference code of desired wallet
      * @param passCodes                      Contains old and new desired passcodes
      * @param onChangeWalletPassCodeListener Listens for network call response.
      */
@@ -122,6 +124,57 @@ public class PayantWalletManager {
             @Override
             public void onFailure(Call<PayantWalletInfoList> call, Throwable t) {
                 onGetPayantWalletsListListener.onFailure(t);
+            }
+        });
+    }
+
+    /**
+     * Toggle wallet between being Enabled or Disabled
+     *
+     * @param walletReferenceCode     Reference code of desired wallet
+     * @param onWalletToggledListener Listens for network call response.
+     */
+    public static void toggleWalletEnabledOrDisabled(String walletReferenceCode, final OnWalletToggledListener onWalletToggledListener) {
+        Call<OperationStatus> operationStatusCall = payantApiService.disableOrEnableWallet(Headers.contentType(), Headers.authorization(), walletReferenceCode);
+        operationStatusCall.enqueue(new Callback<OperationStatus>() {
+            @Override
+            public void onResponse(Call<OperationStatus> call, Response<OperationStatus> response) {
+                if (response.isSuccessful()) {
+                    onWalletToggledListener.onManagerResponse(response.body());
+                } else {
+                    onWalletToggledListener.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OperationStatus> call, Throwable t) {
+                onWalletToggledListener.onFailure(t);
+            }
+        });
+    }
+
+    /**
+     * Withdraw from wallet
+     *
+     * @param walletReferenceCode Reference code of desired wallet
+     * @param payantWalletWithdraw Contains information about client, amount and passcode to be used for transaction
+     * @param onWithdrawFromWallet Listens for network call response
+     */
+    public static void withdrawFromWallet(String walletReferenceCode, PayantWalletWithdraw payantWalletWithdraw, final OnWithdrawFromWallet onWithdrawFromWallet) {
+        Call<PayantWalletWithdrawInfo> payantWalletWithdrawInfoCall = payantApiService.withdrawFromWallet(Headers.contentType(), Headers.authorization(), walletReferenceCode, payantWalletWithdraw);
+        payantWalletWithdrawInfoCall.enqueue(new Callback<PayantWalletWithdrawInfo>() {
+            @Override
+            public void onResponse(Call<PayantWalletWithdrawInfo> call, Response<PayantWalletWithdrawInfo> response) {
+                if (response.isSuccessful()) {
+                    onWithdrawFromWallet.onManagerResponse(response.body());
+                } else {
+                    onWithdrawFromWallet.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PayantWalletWithdrawInfo> call, Throwable t) {
+                onWithdrawFromWallet.onFailure(t);
             }
         });
     }
@@ -192,5 +245,42 @@ public class PayantWalletManager {
          * @param t Throwable
          */
         void onFailure(Throwable t);
+    }
+
+    public interface OnWalletToggledListener {
+        /**
+         * Invoked when a Payant response is received
+         * Note: Does not guarantee that the operation was successful. Call {@code OperationStatus.isSuccessful()} to confirm.
+         *
+         * @param operationStatus Contains information of operation status and message
+         */
+        void onManagerResponse(OperationStatus operationStatus);
+
+        /**
+         * Invoked when unexpected exceptions or network exception occurs
+         *
+         * @param t Throwable
+         */
+        void onFailure(Throwable t);
+
+
+    }
+
+    public interface OnWithdrawFromWallet {
+        /**
+         * Invoked when a Payant response is received
+         * Note: Does not guarantee that the operation was successful. Call {@code PayantWalletWithdrawInfo.isSuccessful()} to confirm.
+         *
+         * @param payantWalletWithdrawInfo Contains information of wallet transaction
+         */
+        void onManagerResponse(PayantWalletWithdrawInfo payantWalletWithdrawInfo);
+
+        /**
+         * Invoked when unexpected exceptions or network exception occurs
+         *
+         * @param t Throwable
+         */
+        void onFailure(Throwable t);
+
     }
 }

@@ -7,6 +7,9 @@ public class PassCodes {
     private String old_passcode;
     private String passcode;
 
+    public PassCodes() {
+    }
+
     /**
      * @param oldPasscode Old Wallets's passcode
      * @param passcode    New Wallets's passcode (min of 6 char)
