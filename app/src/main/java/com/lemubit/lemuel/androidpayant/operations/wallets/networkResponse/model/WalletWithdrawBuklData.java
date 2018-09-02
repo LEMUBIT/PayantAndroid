@@ -1,9 +1,6 @@
-package com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse;
+package com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.model;
 
-/**
- * @author lemuel
- */
-public class WalletWithdrawData {
+public class WalletWithdrawBuklData {
     private String company_id;
     private String wallet_id;
     private String wallet_reference_code;
@@ -25,19 +22,16 @@ public class WalletWithdrawData {
     private String disburse_ref;
     private String disburse_response;
     private String disburse_recipients_response;
-    private String settlement_bank;
-    private String account_number;
-    private String account_name;
 
-    public String getcompanyId() {
+    public String getCompanyId() {
         return company_id;
     }
 
-    public String getwalletId() {
+    public String getWalletId() {
         return wallet_id;
     }
 
-    public String getwalletReferenceCode() {
+    public String getWalletReferenceCode() {
         return wallet_reference_code;
     }
 
@@ -49,7 +43,7 @@ public class WalletWithdrawData {
         return amount;
     }
 
-    public String getreferenceCode() {
+    public String getReferenceCode() {
         return reference_code;
     }
 
@@ -65,15 +59,15 @@ public class WalletWithdrawData {
         return status;
     }
 
-    public String getdisburseRecipients() {
+    public String getDisburseRecipients() {
         return disburse_recipients;
     }
 
-    public String getcreatedAt() {
+    public String getCreatedAt() {
         return created_at;
     }
 
-    public String getupdatedAt() {
+    public String getUpdatedAt() {
         return updated_at;
     }
 
@@ -81,11 +75,11 @@ public class WalletWithdrawData {
         return id;
     }
 
-    public String gettransactionDate() {
+    public String getTransactionDate() {
         return transaction_date;
     }
 
-    public String getpaymentId() {
+    public String getPaymentId() {
         return payment_id;
     }
 
@@ -93,41 +87,29 @@ public class WalletWithdrawData {
         return referrer;
     }
 
-    public String getgatewayResponse() {
+    public String getGatewayResponse() {
         return gateway_response;
     }
 
-    public String getdisburseStatus() {
+    public String getDisburseStatus() {
         return disburse_status;
     }
 
-    public String getdisburseRef() {
+    public String getDisburseRef() {
         return disburse_ref;
     }
 
-    public String getdisburseResponse() {
+    public String getDisburseResponse() {
         return disburse_response;
     }
 
-    public String getdisburseRecipientsResponse() {
+    public String getDisburseRecipientsResponse() {
         return disburse_recipients_response;
-    }
-
-    public String getsettlementBank() {
-        return settlement_bank;
-    }
-
-    public String getaccountNumber() {
-        return account_number;
-    }
-
-    public String getaccountName() {
-        return account_name;
     }
 
     @Override
     public String toString() {
-        return "WalletWithdrawData{" +
+        return "WalletWithdrawBuklData{" +
                 "company_id='" + company_id + '\'' +
                 ", wallet_id='" + wallet_id + '\'' +
                 ", wallet_reference_code='" + wallet_reference_code + '\'' +
@@ -149,9 +131,6 @@ public class WalletWithdrawData {
                 ", disburse_ref='" + disburse_ref + '\'' +
                 ", disburse_response='" + disburse_response + '\'' +
                 ", disburse_recipients_response='" + disburse_recipients_response + '\'' +
-                ", settlement_bank='" + settlement_bank + '\'' +
-                ", account_number='" + account_number + '\'' +
-                ", account_name='" + account_name + '\'' +
                 '}';
     }
 }

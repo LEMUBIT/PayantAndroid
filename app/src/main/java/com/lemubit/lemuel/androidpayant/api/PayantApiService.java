@@ -12,8 +12,10 @@ import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.Paya
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PassCodes;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWallet;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWalletWithdraw;
+import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWalletWithdrawBulk;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfo;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfoList;
+import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletWithdrawBulkInfo;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletWithdrawInfo;
 import com.lemubit.lemuel.androidpayant.utils.PayantHistory;
 
@@ -224,4 +226,14 @@ public interface PayantApiService {
      */
     @POST("wallets/withdraw/{reference_code}")
     Call<PayantWalletWithdrawInfo> withdrawFromWallet(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String walletReferenceCode, @Body PayantWalletWithdraw payantWalletWithdraw);
+
+    /**
+     * @param contentType
+     * @param authorization
+     * @param walletReferenceCode
+     * @param payantWalletWithdrawBulk
+     * @return
+     */
+    @POST("wallets/withdraw/{reference_code}")
+    Call<PayantWalletWithdrawBulkInfo> withdrawFromWalletBulk(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String walletReferenceCode, @Body PayantWalletWithdrawBulk payantWalletWithdrawBulk);
 }

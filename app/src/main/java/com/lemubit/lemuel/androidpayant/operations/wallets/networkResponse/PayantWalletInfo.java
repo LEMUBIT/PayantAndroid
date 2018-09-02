@@ -1,5 +1,6 @@
 package com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse;
 
+import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.model.WalletData;
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
 /**

@@ -1,4 +1,4 @@
-package com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse;
+package com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.model;
 
 /**
  * @author lemuel

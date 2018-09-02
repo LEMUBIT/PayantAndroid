@@ -8,8 +8,10 @@ import com.lemubit.lemuel.androidpayant.operations.OperationStatus;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PassCodes;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWallet;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWalletWithdraw;
+import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWalletWithdrawBulk;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfo;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfoList;
+import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletWithdrawBulkInfo;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletWithdrawInfo;
 
 import retrofit2.Call;
@@ -47,7 +49,6 @@ public class PayantWalletManager {
             }
         });
     }
-
 
     /**
      * Get wallet information using provided wallet reference code
@@ -102,7 +103,6 @@ public class PayantWalletManager {
         });
     }
 
-
     /**
      * Get list of available wallets
      *
@@ -156,7 +156,7 @@ public class PayantWalletManager {
     /**
      * Withdraw from wallet
      *
-     * @param walletReferenceCode Reference code of desired wallet
+     * @param walletReferenceCode  Reference code of desired wallet
      * @param payantWalletWithdraw Contains information about client, amount and passcode to be used for transaction
      * @param onWithdrawFromWallet Listens for network call response
      */
@@ -175,6 +175,32 @@ public class PayantWalletManager {
             @Override
             public void onFailure(Call<PayantWalletWithdrawInfo> call, Throwable t) {
                 onWithdrawFromWallet.onFailure(t);
+            }
+        });
+    }
+
+    /**
+     * bulk withdraw from wallet
+     *
+     * @param walletReferenceCode      Reference code of desired wallet
+     * @param payantWalletWithdrawBulk Contains information about clients, amounts and passcode to be used for transaction
+     * @param onBulkWithdrawFromWallet Listens for network call response
+     */
+    public static void bulkWithdrawFromWallet(String walletReferenceCode, PayantWalletWithdrawBulk payantWalletWithdrawBulk, final OnBulkWithdrawFromWallet onBulkWithdrawFromWallet) {
+        Call<PayantWalletWithdrawBulkInfo> payantWalletWithdrawBulkInfoCall = payantApiService.withdrawFromWalletBulk(Headers.contentType(), Headers.authorization(), walletReferenceCode, payantWalletWithdrawBulk);
+        payantWalletWithdrawBulkInfoCall.enqueue(new Callback<PayantWalletWithdrawBulkInfo>() {
+            @Override
+            public void onResponse(Call<PayantWalletWithdrawBulkInfo> call, Response<PayantWalletWithdrawBulkInfo> response) {
+                if (response.isSuccessful()) {
+                    onBulkWithdrawFromWallet.onManagerResponse(response.body());
+                } else {
+                    onBulkWithdrawFromWallet.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PayantWalletWithdrawBulkInfo> call, Throwable t) {
+                onBulkWithdrawFromWallet.onFailure(t);
             }
         });
     }
@@ -274,6 +300,24 @@ public class PayantWalletManager {
          * @param payantWalletWithdrawInfo Contains information of wallet transaction
          */
         void onManagerResponse(PayantWalletWithdrawInfo payantWalletWithdrawInfo);
+
+        /**
+         * Invoked when unexpected exceptions or network exception occurs
+         *
+         * @param t Throwable
+         */
+        void onFailure(Throwable t);
+
+    }
+
+    public interface OnBulkWithdrawFromWallet {
+        /**
+         * Invoked when a Payant response is received
+         * Note: Does not guarantee that the operation was successful. Call {@code PayantWalletWithdrawBulkInfo.isSuccessful()} to confirm.
+         *
+         * @param payantWalletWithdrawBulkInfo Contains information of wallet transaction
+         */
+        void onManagerResponse(PayantWalletWithdrawBulkInfo payantWalletWithdrawBulkInfo);
 
         /**
          * Invoked when unexpected exceptions or network exception occurs

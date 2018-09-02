@@ -1,15 +1,12 @@
 package com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse;
 
-import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.model.WalletWithdrawData;
+import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.model.WalletWithdrawBuklData;
 import com.lemubit.lemuel.androidpayant.utils.StatusString;
 
-/**
- * @author lemuel
- */
-public class PayantWalletWithdrawInfo {
+public class PayantWalletWithdrawBulkInfo {
     private String status;
     private String message;
-    private WalletWithdrawData data;
+    private WalletWithdrawBuklData data;
 
     public String getStatus() {
         return status;
@@ -19,7 +16,7 @@ public class PayantWalletWithdrawInfo {
         return message;
     }
 
-    public WalletWithdrawData getData() {
+    public WalletWithdrawBuklData getData() {
         return data;
     }
 
@@ -29,7 +26,7 @@ public class PayantWalletWithdrawInfo {
 
     @Override
     public String toString() {
-        return "PayantWalletWithdrawInfo{" +
+        return "PayantWalletWithdrawBulkInfo{" +
                 "status='" + status + '\'' +
                 ", message='" + message + '\'' +
                 ", data=" + data +
