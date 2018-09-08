@@ -19,7 +19,7 @@ public class PayantApiClient {
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Url.DEMO_BASE_URL)
+                .baseUrl(Url.getURL())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         payantApiService = retrofit.create(PayantApiService.class);

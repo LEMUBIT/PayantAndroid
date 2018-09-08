@@ -21,14 +21,18 @@ public final class Payant {
 
     private static boolean privateKeySet = false;
 
+    private static boolean LiveMode=false;
+
 
     /**
      * Initializes the Payant library, this only has to be done once. It is required to call
      * this method before interacting with any other of the Payant API's.
      *
-     * @param applicationContext
+     * @param applicationContext app Context
+     * @param live set to true when in live mode, set to false when using a demo account to test
      */
-    public static void init(Context applicationContext) {
+    public static void init(Context applicationContext, Boolean live) {
+        applicationContext=applicationContext.getApplicationContext();
 
         if (payantInitialized) {
             Log.w(applicationContext.getString(R.string.payantInitializedWarningTitle), applicationContext.getString(R.string.payantInitializedWarningDescription));
@@ -40,6 +44,8 @@ public final class Payant {
             Payant.applicationContext = applicationContext;
 
             payantInitialized = true;
+
+            LiveMode=live;
         }
 
     }
@@ -70,6 +76,11 @@ public final class Payant {
         Validate.payantInitialized();
         PRIVATE_KEY = privateKey;
         privateKeySet = true;
+    }
+
+    public static Boolean isLiveMode()
+    {
+        return LiveMode;
     }
 
 

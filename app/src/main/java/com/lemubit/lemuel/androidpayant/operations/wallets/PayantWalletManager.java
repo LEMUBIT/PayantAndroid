@@ -11,8 +11,10 @@ import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWalletWit
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWalletWithdrawBulk;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfo;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletInfoList;
+import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletTransactionsInfo;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletWithdrawBulkInfo;
 import com.lemubit.lemuel.androidpayant.operations.wallets.networkResponse.PayantWalletWithdrawInfo;
+import com.lemubit.lemuel.androidpayant.utils.PayantHistory;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -205,6 +207,32 @@ public class PayantWalletManager {
         });
     }
 
+    /**
+     * get history of wallet transactions
+     *
+     * @param walletReferenceCode             Reference code of desired wallet
+     * @param payantHistory                   Contains parameters such as time frame used for search
+     * @param onGetWalletTransactionsListener Listens for network call response
+     */
+    public static void getWalletTransactions(String walletReferenceCode, PayantHistory payantHistory, final OnGetWalletTransactionsListener onGetWalletTransactionsListener) {
+        Call<PayantWalletTransactionsInfo> payantWalletTransactionsInfoCall = payantApiService.getWalletTransactions(Headers.contentType(), Headers.authorization(), walletReferenceCode, payantHistory);
+        payantWalletTransactionsInfoCall.enqueue(new Callback<PayantWalletTransactionsInfo>() {
+            @Override
+            public void onResponse(Call<PayantWalletTransactionsInfo> call, Response<PayantWalletTransactionsInfo> response) {
+                if (response.isSuccessful()) {
+                    onGetWalletTransactionsListener.onManagerResponse(response.body());
+                } else {
+                    onGetWalletTransactionsListener.onFailure(new PayantServerException("Error: " + String.valueOf(response.code())));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PayantWalletTransactionsInfo> call, Throwable t) {
+                onGetWalletTransactionsListener.onFailure(t);
+            }
+        });
+    }
+
     public interface OnAddNewPayantWalletListener {
         /**
          * Invoked when a Payant response is received
@@ -326,5 +354,22 @@ public class PayantWalletManager {
          */
         void onFailure(Throwable t);
 
+    }
+
+    public interface OnGetWalletTransactionsListener {
+        /**
+         * Invoked when a Payant response is received
+         * Note: Does not guarantee that the operation was successful. Call {@code PayantWalletTransactionsInfo.isSuccessful()} to confirm.
+         *
+         * @param payantWalletTransactionsInfo Contains information of wallet transaction
+         */
+        void onManagerResponse(PayantWalletTransactionsInfo payantWalletTransactionsInfo);
+
+        /**
+         * Invoked when unexpected exceptions or network exception occurs
+         *
+         * @param t Throwable
+         */
+        void onFailure(Throwable t);
     }
 }

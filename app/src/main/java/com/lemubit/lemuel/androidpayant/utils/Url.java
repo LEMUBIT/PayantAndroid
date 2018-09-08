@@ -1,10 +1,17 @@
 package com.lemubit.lemuel.androidpayant.utils;
 
+import com.lemubit.lemuel.androidpayant.Payant;
+
 /**
  * @author lemuel
  */
 public class Url {
-    //todo : Currently using DEMO, give users choice to decide to use demo or live
-    public static String DEMO_BASE_URL = "https://api.demo.payant.ng/";
-    public static String BASE_URL = "https://api.payant.ng/";
+
+    public static String getURL() {
+        if (Payant.isLiveMode()) {
+            return "https://api.payant.ng/";
+        } else {
+            return "https://api.demo.payant.ng/";
+        }
+    }
 }

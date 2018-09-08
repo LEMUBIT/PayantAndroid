@@ -31,8 +31,8 @@ public class PayantHistory {
 
     /**
      * @param period History period today, week, month, 30, 90, year or custom
-     * @param start  Starting date DD/MM/YYYY
-     * @param end    End date DD/MM/YYYY
+     * @param start  Starting date DD/MM/YYYY for custom
+     * @param end    End date DD/MM/YYYY for custom
      */
     public PayantHistory(String period, String start, String end) {
         this.period = period;
