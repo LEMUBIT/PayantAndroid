@@ -1,6 +1,7 @@
 package com.lemubit.lemuel.androidpayant.utils;
 
 import android.Manifest;
+import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
@@ -52,7 +53,7 @@ public class ValidateTest {
 
         when(mockContext.getPackageManager()).thenReturn(mockPackageManager);
 
-        Payant.init(mockContext);
+        Payant.init(mockContext,false);
 
         Payant.getPrivateKey();
     }
@@ -64,7 +65,7 @@ public class ValidateTest {
 
         when(mockContext.getPackageManager()).thenReturn(mockPackageManager);
 
-        Payant.init(mockContext);
+        Payant.init(mockContext,false);
 
     }
 

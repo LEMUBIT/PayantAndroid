@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //PayantClient payantClient = new PayantClient();
-        Payant.init(this,false);
+        Payant.init(getApplicationContext(),false);
         Payant.setPrivateKey(getString(R.string.pKey));
 
         PayantClient payantClient = new PayantClient();

@@ -1,5 +1,6 @@
 package com.lemubit.lemuel.androidpayant;
 
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
@@ -21,7 +22,7 @@ public final class Payant {
 
     private static boolean privateKeySet = false;
 
-    private static boolean LiveMode=false;
+    private static boolean LiveMode = false;
 
 
     /**
@@ -29,13 +30,13 @@ public final class Payant {
      * this method before interacting with any other of the Payant API's.
      *
      * @param applicationContext app Context
-     * @param live set to true when in live mode, set to false when using a demo account to test
+     * @param live               set to true when in live mode, set to false when using a demo account to test
      */
     public static void init(Context applicationContext, Boolean live) {
-        applicationContext=applicationContext.getApplicationContext();
-
+        LiveMode = live;
         if (payantInitialized) {
             Log.w(applicationContext.getString(R.string.payantInitializedWarningTitle), applicationContext.getString(R.string.payantInitializedWarningDescription));
+            Log.w(applicationContext.getString(R.string.payantInitializedWarningTitle), "Live Mode Updated = " + String.valueOf(LiveMode));
         } else {
             Validate.valueNotNull(applicationContext, applicationContext.getString(R.string.applicationContext));
 
@@ -45,7 +46,6 @@ public final class Payant {
 
             payantInitialized = true;
 
-            LiveMode=live;
         }
 
     }
@@ -78,8 +78,7 @@ public final class Payant {
         privateKeySet = true;
     }
 
-    public static Boolean isLiveMode()
-    {
+    public static Boolean isLiveMode() {
         return LiveMode;
     }
 
