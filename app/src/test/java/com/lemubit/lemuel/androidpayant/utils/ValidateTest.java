@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 public class ValidateTest {
@@ -54,6 +55,10 @@ public class ValidateTest {
         when(mockContext.getPackageManager()).thenReturn(mockPackageManager);
 
         Payant.init(mockContext,false);
+        assertEquals(Url.getURL(), "https://api.demo.payant.ng/");
+
+        Payant.init(mockContext,true);
+        assertEquals(Url.getURL(), "https://api.payant.ng/");
 
         Payant.getPrivateKey();
     }
@@ -68,5 +73,6 @@ public class ValidateTest {
         Payant.init(mockContext,false);
 
     }
+
 
 }
