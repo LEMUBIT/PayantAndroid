@@ -7,6 +7,6 @@
 
 Payant Android can be used to access features on your Payant account dashboard. 
 
-It is not meant to be used in public apps that are handled by clients, rather it's to be used to personally access invoicing features on your personal Payant account. This library can be used to make a custom personal app that does just that. 
+It is assumed that this library wouldn't be used on a client facing App but rather for secure and private use. This is because it uses your account private key for initilization. 
 
-I strongly advise that you read the Payant API documentation before using this library, that would make the whole process of understanding the library a lot faster and easier. 
+For better understanding read the [Payant API documentation](https://developers.payant.ng/overview) before using this library.
