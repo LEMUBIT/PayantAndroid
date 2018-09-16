@@ -9,6 +9,10 @@ import com.lemubit.lemuel.androidpayant.operations.invoices.networkResponse.Paya
 import com.lemubit.lemuel.androidpayant.operations.payments.model.PayantPayment;
 import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.PayantPaymentHistoryInfo;
 import com.lemubit.lemuel.androidpayant.operations.payments.networkResponse.PayantPaymentInfo;
+import com.lemubit.lemuel.androidpayant.operations.product.model.PayantProduct;
+import com.lemubit.lemuel.androidpayant.operations.product.networkResponse.PayantAddProductInfo;
+import com.lemubit.lemuel.androidpayant.operations.product.networkResponse.PayantProductInfo;
+import com.lemubit.lemuel.androidpayant.operations.product.networkResponse.PayantProductInfoList;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PassCodes;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWallet;
 import com.lemubit.lemuel.androidpayant.operations.wallets.model.PayantWalletWithdraw;
@@ -246,5 +250,50 @@ public interface PayantApiService {
      */
     @POST("wallets/transactions/{reference_code}")
     Call<PayantWalletTransactionsInfo> getWalletTransactions(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("reference_code") String walletReferenceCode, @Body PayantHistory payantHistory);
+
+
+    /**
+     * @param contentType
+     * @param authorization
+     * @param payantProduct
+     */
+    @POST("products")
+    Call<PayantAddProductInfo> addNewProduct(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Body PayantProduct payantProduct);
+
+
+    /**
+     * @param contentType
+     * @param authorization
+     * @param productID
+     */
+    @GET("products/{product_id}")
+    Call<PayantProductInfo> getProduct(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("product_id") String productID);
+
+
+    /**
+     * @param contentType
+     * @param authorization
+     * @param productID
+     * @param payantProduct
+     */
+    @PUT("products/{product_id}")
+    Call<PayantAddProductInfo> editProduct(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("product_id") String productID, @Body PayantProduct payantProduct);
+
+
+    /**
+     * @param contentType
+     * @param authorization
+     */
+    @GET("products")
+    Call<PayantProductInfoList> getAllProduct(@Header("Content-Type") String contentType, @Header("Authorization") String authorization);
+
+
+    /**
+     * @param contentType
+     * @param authorization
+     * @param productID
+     */
+    @DELETE("products/{product_id}")
+    Call<OperationStatus> deleteProduct(@Header("Content-Type") String contentType, @Header("Authorization") String authorization, @Path("product_id") String productID);
 
 }

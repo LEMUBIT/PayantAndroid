@@ -34,6 +34,7 @@ public final class Payant {
      */
     public static void init(Context applicationContext, Boolean live) {
         LiveMode = live;
+
         if (payantInitialized) {
             Log.w(applicationContext.getString(R.string.payantInitializedWarningTitle), applicationContext.getString(R.string.payantInitializedWarningDescription));
             Log.w(applicationContext.getString(R.string.payantInitializedWarningTitle), "Live Mode Updated = " + String.valueOf(LiveMode));
