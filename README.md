@@ -28,9 +28,9 @@ allprojects {
 1. **Add the Library dependency**
 
 ```
-	dependencies {
-	        implementation 'com.github.LEMUBIT:PayantAndroid:1.1.0'
-	}
+dependencies {
+     implementation 'com.github.LEMUBIT:PayantAndroid:1.1.0'
+}
 ```
 
 2. **Ensure that your app has internet permissions by making sure the `uses-permission` line below is present in the AndroidManifest.xml.**
