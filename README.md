@@ -15,7 +15,7 @@ Each of the major operations has a Manager Class in the PayantAndroid library, t
 
 ## How to use ##
 
-1. **Add [JitPack](https://jitpack.io/) to your build file.**
+0. **Add [JitPack](https://jitpack.io/) to your build file.**
 ```
 allprojects {
   repositories {
@@ -23,6 +23,13 @@ allprojects {
     maven { url 'https://jitpack.io' }
   }
 }
+```
+1. **Add the Library dependency**
+
+```
+	dependencies {
+	        implementation 'com.github.LEMUBIT:PayantAndroid:1.1.0'
+	}
 ```
 
 2. **Ensure that your app has internet permissions by making sure the `uses-permission` line below is present in the AndroidManifest.xml.**
