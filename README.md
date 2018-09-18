@@ -10,3 +10,5 @@ Payant Android can be used to access features on your [Payant](https://payant.ng
 It is assumed that this library wouldn't be used on a client facing App but rather for secure and private use. This is because it uses your account private key for initilization. 
 
 For better understanding read the [Payant API documentation](https://developers.payant.ng/overview) before using this library.
+
+Each of the major operations has a Manager Class in the PayantAndroid library, these managers are PayantClientManager, PayantInvoiceManager, PayantPaymentManager, PayantWalletmanager, PayantProductManager. These Manager Classes perform all needed operations that are performed in your dashboard, for instance the PayantClientManager can ADD, GET, EDIT, and DELETE a Client. 
