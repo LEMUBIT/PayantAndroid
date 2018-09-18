@@ -11,4 +11,4 @@ It is assumed that this library wouldn't be used on a client facing App but rath
 
 For better understanding read the [Payant API documentation](https://developers.payant.ng/overview) before using this library.
 
-Each of the major operations has a Manager Class in the PayantAndroid library, these managers are PayantClientManager, PayantInvoiceManager, PayantPaymentManager, PayantWalletmanager, PayantProductManager. These Manager Classes perform all needed operations that are performed in your dashboard, for instance the PayantClientManager can ADD, GET, EDIT, and DELETE a Client. 
+Each of the major operations has a Manager Class in the PayantAndroid library, these managers are *PayantClientManager*, *PayantInvoiceManager*, *PayantPaymentManager*, *PayantWalletmanager*, *PayantProductManager*. These Manager Classes perform all needed operations that are performed on your dashboard, for instance the *PayantClientManager* Class can ADD, GET, EDIT, and DELETE a Client. 
