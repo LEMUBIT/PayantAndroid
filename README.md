@@ -82,5 +82,5 @@ This library isn't meant to be used in apps that are distributed to different cl
 
 ### Where is the full documentation?
 
-The full documentation would be out soon...
+The library can be used right away but full documentation would be out soon...
 
