@@ -4,6 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/9239daa9216d4e97f328/maintainability)](https://codeclimate.com/github/LEMUBIT/PayantAndroid/maintainability)
 [![CircleCI](https://circleci.com/gh/LEMUBIT/PayantAndroid.svg?style=svg)](https://circleci.com/gh/LEMUBIT/PayantAndroid)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
+[![](https://jitpack.io/v/LEMUBIT/PayantAndroid.svg)](https://jitpack.io/#LEMUBIT/PayantAndroid)
 
 Payant Android can be used to access features on your [Payant](https://payant.ng/) account dashboard. 
 
