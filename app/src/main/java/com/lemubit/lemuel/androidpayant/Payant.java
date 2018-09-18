@@ -1,6 +1,5 @@
 package com.lemubit.lemuel.androidpayant;
 
-import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
@@ -32,7 +31,7 @@ public final class Payant {
      * @param applicationContext app Context
      * @param live               set to true when in live mode, set to false when using a demo account to test
      */
-    public static void init(Context applicationContext, Boolean live) {
+    synchronized public static void init(Context applicationContext, Boolean live) {
         LiveMode = live;
 
         if (payantInitialized) {
