@@ -78,7 +78,7 @@ In the sample above, the object `PayantClientInfo` contains the information of t
 
 ### Why are you using Private Keys?
 
-This library isn't meant to be used in apps that are distributed to different clients, it is rather to be used in in-house applications which are secure and access to Payant dashboard features are needed. 
+This library isn't meant to be used in apps that are distributed to different clients, though that is possible, it is rather to be used in in-house applications which are secure and access to Payant dashboard features are needed. 
 
 ### Where is the full documentation?
 
