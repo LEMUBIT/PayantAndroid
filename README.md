@@ -72,13 +72,4 @@ Use the manager Class of the operation you want to perform. For instance perhaps
 In the sample above, the object `PayantClientInfo` contains the information of the Client whose info was requested. 
 
 
-## FAQs
-
-### Why are you using Private Keys?
-
-This library isn't meant to be used in apps that are distributed to different clients, though that is possible, it is rather to be used in in-house applications which are secure and access to Payant dashboard features are needed. 
-
-### Where is the full documentation?
-
-The library can be used right away but full documentation would be out soon...
 
